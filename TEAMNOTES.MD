@@ -26,11 +26,14 @@ These are notes to be maintained PER date that you meet. What you did and what t
 - flexibility of the content security
 #### What "states" does this card have?
 - hover
-- disbled
+- disabled
 - click to show
 - type of card 
 #### What do we call it?
-- 
+- sci-card-hover
+- sci-card-disabled
+- sci-card-focus
+- sci-card-resize
 #### What areas do we need to account for flexible content / HTML entry of any kind?
 - size of card
 - heading overflow
@@ -40,7 +43,10 @@ These are notes to be maintained PER date that you meet. What you did and what t
 - title
 - header/banner
 #### What should we call each of them?
-- 
+- sci-card
+- sci-card-header
+- sci-card-icon
+- sci-card-content-body
 
 
 ## Status check ins
