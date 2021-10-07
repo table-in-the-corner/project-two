@@ -43,16 +43,16 @@ These are notes to be maintained PER date that you meet. What you did and what t
 - title
 - header/banner
 #### What should we call each of them?
-- sci-card
-- sci-card-header
-- sci-card-icon
-- sci-card-content-body
+- sci-card -> Nick
+- sci-card-header -> Bailee
+- sci-card-icon -> Nicole
+- sci-card-content-body -> Noelle
 
 
 ## Status check ins
 These are dedicated status check-ins as this is a multi-week project
 ### Check-in 1
-- 
+- Card will support swiping to expand a drawer on the side of the card. The drawer will contain a list of icons that can be clicked to update the content displayed on the card.
 - 
 ### Check-in 2
 - 
