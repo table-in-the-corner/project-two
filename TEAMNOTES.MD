@@ -14,7 +14,7 @@ These are notes to be maintained PER date that you meet. What you did and what t
 #### What are the characteristics of the card?
 - icon
 - colored banner
-- headers and subheader
+- headers and subheader (banner)
 - content body
 #### What design considerations must we take into account?
 - contrast
@@ -44,7 +44,7 @@ These are notes to be maintained PER date that you meet. What you did and what t
 - header/banner
 #### What should we call each of them?
 - sci-card -> Nick
-- sci-card-header -> Bailey
+- sci-card-banner -> Bailey
 - sci-card-icon -> Nicole
 - sci-card-content-body -> Noelle
 
@@ -60,13 +60,14 @@ These are dedicated status check-ins as this is a multi-week project
       - Expanded State
       - Pane Focus
       - Given that this card will involve a 2 pane system, where the top pane slides to "reveal" content below it, the design will need to specify horizontal scroll boundaries so that the upper pane can only slide so far open as to not overflow other content on the page.
-  - sci-card-header -> Bailey
+  - sci-card-banner -> Bailey
     - Properties & Design:
       - Class
       - Theme
       - Title
-      - The header/banner will need to be responsive based on the width of the card itself.
-      - The header will need to adapt the font size of the heading and subheading text depending on the size of the header so that the text follows appropriate typography hierarchy.
+      - The banner will contain a header and a subheader within it, and contain a variation of the icon element as well.
+      - The banner will need to be responsive based on the width of the card itself.
+      - The banner will need to adapt the font size of the heading and subheading text depending on the size of the header so that the text follows appropriate typography hierarchy.
   - sci-card-icon -> Nicole
     - Properties & Design:
       - Size/Dimensions
@@ -84,7 +85,7 @@ These are dedicated status check-ins as this is a multi-week project
 
 - Next reponsibilities:
   - Nick: Begin experimenting with how to create a layered card while controling the horizontal "slide" distance and behavior.
-  - Bailey: Research flexbox and begin designing the header layout to support various card widths
+  - Bailey: Research flexbox and begin designing the banner layout to support various card widths.
   - Nicole: Investigate the best way to support various icon sizes, both within our header and on the inner card pane. Also ideate upon the types of card content we want to support and finding icons that accurately represent that content.
   - Noelle: Research on flexbox and how to appropriately contain different types of content in the same card body area. This includes text content, images, and and potentially iFrames. Would conditional rendering be enough, or would this create issues with resposiveness of content relative to the card scaffolding?
 
