@@ -52,8 +52,42 @@ These are notes to be maintained PER date that you meet. What you did and what t
 ## Status check ins
 These are dedicated status check-ins as this is a multi-week project
 ### Check-in 1
-- Card will support swiping to expand a drawer on the side of the card. The drawer will contain a list of icons that can be clicked to update the content displayed on the card.
-- 
+- The possible names of our four elements are:
+  - sci-card -> Nick
+    - Properties & Design:
+      - Slide State (Open/Closed)
+      - Disabled
+      - Expanded State
+      - Pane Focus
+      - Given that this card will involve a 2 pane system, where the top pane slides to "reveal" content below it, the design will need to specify horizontal scroll boundaries so that the upper pane can only slide so far open as to not overflow other content on the page.
+  - sci-card-header -> Bailee
+    - Properties & Design:
+      - Class
+      - Theme
+      - Title
+      - The header/banner will need to be responsive based on the width of the card itself.
+      - The header will need to adapt the font size of the heading and subheading text depending on the size of the header so that the text follows appropriate typography hierarchy.
+  - sci-card-icon -> Nicole
+    - Properties & Design:
+      - Size/Dimensions
+      - Theme/Color Scheme
+      - Supporting a number of themes and different sizes could create readability or contrast issues if the icon gets too small. Understanding which icon designs are still visible with smaller dimensions will be crucial for supporting smaller displays.
+  - sci-card-content-body -> Noelle
+    - Properties & Design:
+      - Content Type (Text, image, etc.)
+      - Text
+      - Max-length
+      - The design of the body will need to take into account the max size or length of content in the body, and potentially hide overflow content inside of an optional dropdown drawer if the amount of text was too large.
+
+- Card will support swiping to expand a drawer on the side of the card. The drawer will contain a list of icons that can be clicked to update the content displayed on the card's front pane.
+
+
+- Next reponsibilities:
+  - Nick: Begin experimenting with how to create a layered card while controling the horizontal "slide" distance and behavior.
+  - Bailee: Research flexbox and begin designing the header layout to support various card widths
+  - Nicole: Investigate the best way to support various icon sizes, both within our header and on the inner card pane. Also ideate upon the types of card content we want to support and finding icons that accurately represent that content.
+  - Noelle: Research on flexbox and how to appropriately contain different types of content in the same card body area. This includes text content, images, and and potentially iFrames. Would conditional rendering be enough, or would this create issues with resposiveness of content relative to the card scaffolding?
+
 ### Check-in 2
 - 
 - 
