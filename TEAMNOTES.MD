@@ -44,7 +44,7 @@ These are notes to be maintained PER date that you meet. What you did and what t
 - header/banner
 #### What should we call each of them?
 - sci-card -> Nick
-- sci-card-header -> Bailee
+- sci-card-header -> Bailey
 - sci-card-icon -> Nicole
 - sci-card-content-body -> Noelle
 
@@ -60,7 +60,7 @@ These are dedicated status check-ins as this is a multi-week project
       - Expanded State
       - Pane Focus
       - Given that this card will involve a 2 pane system, where the top pane slides to "reveal" content below it, the design will need to specify horizontal scroll boundaries so that the upper pane can only slide so far open as to not overflow other content on the page.
-  - sci-card-header -> Bailee
+  - sci-card-header -> Bailey
     - Properties & Design:
       - Class
       - Theme
@@ -84,7 +84,7 @@ These are dedicated status check-ins as this is a multi-week project
 
 - Next reponsibilities:
   - Nick: Begin experimenting with how to create a layered card while controling the horizontal "slide" distance and behavior.
-  - Bailee: Research flexbox and begin designing the header layout to support various card widths
+  - Bailey: Research flexbox and begin designing the header layout to support various card widths
   - Nicole: Investigate the best way to support various icon sizes, both within our header and on the inner card pane. Also ideate upon the types of card content we want to support and finding icons that accurately represent that content.
   - Noelle: Research on flexbox and how to appropriately contain different types of content in the same card body area. This includes text content, images, and and potentially iFrames. Would conditional rendering be enough, or would this create issues with resposiveness of content relative to the card scaffolding?
 
