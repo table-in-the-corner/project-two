@@ -59,7 +59,7 @@ These are notes to be maintained PER date that you meet. What you did and what t
 #### What are your next steps?
 -	Get the basic header/banner working
 -	Get the basic icon working
--	Work on developing our expandable card scaffold via using the <details> and <summary> tags which support expandable content natively.
+-	Work on developing our expandable card scaffold via using the details and summary tags which support expandable content natively.
 
 ## Status check ins
 These are dedicated status check-ins as this is a multi-week project
