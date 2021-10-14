@@ -48,6 +48,15 @@ These are notes to be maintained PER date that you meet. What you did and what t
 - sci-card-icon -> Nicole
 - sci-card-content-body -> Noelle
 
+## October 14
+#### What did you take away from the portion of class about implementing SimpleColors?
+-	It seems like a simpler way to add and balance coloring in the project.
+#### What did you learn from other groups?
+-	I learned that there is an extra layer of difficulty in if you copy and paste from the template for each element vs if you pull pieces of the code out as you need them to get it to work as expected.
+#### What are your next steps?
+-	Get the basic header/banner working
+-	Get the basic icon working
+
 
 ## Status check ins
 These are dedicated status check-ins as this is a multi-week project
