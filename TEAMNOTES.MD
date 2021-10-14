@@ -53,6 +53,7 @@ These are notes to be maintained PER date that you meet. What you did and what t
 -	It seems like a simpler way to add and balance coloring in the project.
 #### What did you learn from other groups?
 -	I learned that there is an extra layer of difficulty in if you copy and paste from the template for each element vs if you pull pieces of the code out as you need them to get it to work as expected.
+-	I learned more my portion of the project being the icon. I worked with the other people in the groups who were also working on the icon section and learned what they are doing and told them about what my ideas were.
 #### What are your next steps?
 -	Get the basic header/banner working
 -	Get the basic icon working
