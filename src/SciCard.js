@@ -8,8 +8,8 @@ import { SimpleColors } from '@lrnwebcomponents/simple-colors/simple-colors.js';
 // because this won't change we can leverage as an internal variable without being
 // declared in properties. This let's us ship the icons while referencing them correctly
 const beaker = new URL('../assets/beaker.svg', import.meta.url).href;
-const lightbulb = new URL('../assets/lightbulb.svg', import.meta.url).href;
-const question = new URL('../assets/question.svg', import.meta.url).href;
+// const lightbulb = new URL('../assets/lightbulb.svg', import.meta.url).href;
+// const question = new URL('../assets/question.svg', import.meta.url).href;
 // EXPORT (so make available to other documents that reference this file) a class, that extends LitElement
 // which has the magic life-cycles and developer experience below added
 export class SciCard extends SimpleColors {
@@ -25,6 +25,15 @@ export class SciCard extends SimpleColors {
     this.type = 'math';
     this.accentColor = 'blue';
     this.dark = 'false';
+
+    // document.querySelector('#cardFrame').addEventListener('toggle', event => {
+    //   if (document.querySelector('#cardFrame').open) {
+    //     document.querySelector('summary').style.transform = 'rotate(-90deg)';
+    //   } else {
+    //     document.querySelector('summary').style.transform = 'rotate(90deg)';
+    //   }
+    // })
+    // this.addEventListener('toggle', document.querySelector('summary')._rotateIcon);
   }
 
   // properties that you wish to use as data in HTML, CSS, and the updated life-cycle
@@ -68,6 +77,24 @@ export class SciCard extends SimpleColors {
     super.disconnectedCallback();
   }
 
+  _rotateIcon() {
+    // console.log(this);
+    if (!this.shadowRoot.querySelector('details').open) {
+      this.shadowRoot.querySelector('summary').style.listStyleImage =
+        "url('../assets/arrow-down.svg')";
+    } else {
+      this.shadowRoot.querySelector('summary').style.listStyleImage =
+        "url('../assets/arrow-right.svg')";
+    }
+
+    // if (this.open) {
+    //   document.querySelector('summary::marker').style.transform = 'rotate(-90deg)';
+    // } else {
+    //   console.log("hi");
+    //   // document.querySelector('summary::marker').style.transform = 'rotate(90deg)';
+    // }
+  }
+
   // CSS - specific to Lit
   static get styles() {
     return [
@@ -75,6 +102,7 @@ export class SciCard extends SimpleColors {
       css`
         :host {
           display: block;
+          --learning-objective-primary-color: orange-5;
         }
         /* this is how you match something on the tag itself like <learning-card type="math"> and then style the img inside */
         :host([type='math']) img {
@@ -86,12 +114,21 @@ export class SciCard extends SimpleColors {
           width: var(--learning-card-width, 100px);
           background-color: green;
         }
-        #iconContainer {
+        summary {
+          list-style-position: inside;
+          list-style-image: url('../assets/arrow-right.svg');
+        }
+        #drawerContents {
           display: flex;
-          flex-direction: row;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
         }
         #cardFrame {
           box-shadow: 1px 1px 1px 1px;
+        }
+        summary:hover {
+          background-color: var(--simple-colors-default-theme-orange-6);
         }
       `,
     ];
@@ -104,7 +141,7 @@ export class SciCard extends SimpleColors {
       <div>${this.type}</div>
       <div id="cardFrame">
         <details>
-          <summary>
+          <summary @click="${this._rotateIcon}">
             <div
               class="slot-wrapper"
               data-label="Header"
@@ -113,8 +150,6 @@ export class SciCard extends SimpleColors {
               <slot name="header"></slot>
             </div>
             <img part="icon" src="${beaker}" alt="" />
-            <img part="icon" src="${lightbulb}" alt="" />
-            <img part="icon" src="${question}" alt="" />
             <div
               class="slot-wrapper"
               data-label="Content"
@@ -124,10 +159,11 @@ export class SciCard extends SimpleColors {
               <slot></slot>
             </div>
           </summary>
-          <div id="iconContainer">
-            <button>Test</button>
-            <button>Test</button>
-            <button>Test</button>
+          <div id="drawerContents">
+            <ul>
+              <li>Test</li>
+              <li>Test2</li>
+            </ul>
           </div>
         </details>
       </div>
