@@ -20,7 +20,7 @@ export class SciCardIcon extends SimpleColors {
         ];
     }
     render() {
-        return html`<div>Icon Stuff<slot></slot><div>`;
+        return html`<div>Icon Image<slot></slot><div>`;
     }
 }
 window.customElements.define(SciCardIcon.tag, SciCardIcon);
