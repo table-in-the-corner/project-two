@@ -22,7 +22,7 @@ export class SciCard extends SimpleColors {
   constructor() {
     super();
     this.myIcon = null;
-    this.type = 'math';
+    this.type = '';
     this.accentColor = 'blue';
     this.dark = 'false';
 
@@ -125,11 +125,11 @@ export class SciCard extends SimpleColors {
           align-items: center;
         }
         #cardFrame {
-          box-shadow: 1px 1px 1px 1px;
+          box-shadow: 4px 4px 7px 0px rgba(128, 0, 0, 1);
         }
-        summary:hover {
+        /* summary:hover {
           background-color: var(--simple-colors-default-theme-orange-6);
-        }
+        } */
       `,
     ];
   }
@@ -141,7 +141,7 @@ export class SciCard extends SimpleColors {
       <div>${this.type}</div>
       <div id="cardFrame">
         <details>
-          <summary @click="${this._rotateIcon}">
+          <summary @click="${this._rotateIcon}" part="banner">
             <div
               class="slot-wrapper"
               data-label="Header"
