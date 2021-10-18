@@ -14,7 +14,7 @@ export class LearningIcon extends SimpleColors {
             :host {
                 display: block;
                 background-color: var(--simple-colors-default-theme-accent-1);
-                border: 2px solid orange;
+                border: 2px solid cyan;
             }
             `
         ];
