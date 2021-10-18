@@ -1,13 +1,14 @@
 // dependencies / things imported
 import { html, css } from 'lit';
 import { SimpleColors } from '@lrnwebcomponents/simple-colors/simple-colors.js';
+import './SciCardBanner.js';
 
 // this is the base path to the assets calculated at run time
 // this ensures that assets are shipped correctly when building the demo
 // on github pages, or when people reuse assets outside your elements in production
 // because this won't change we can leverage as an internal variable without being
 // declared in properties. This let's us ship the icons while referencing them correctly
-const beaker = new URL('../assets/beaker.svg', import.meta.url).href;
+// const beaker = new URL('../assets/beaker.svg', import.meta.url).href;
 // const lightbulb = new URL('../assets/lightbulb.svg', import.meta.url).href;
 // const question = new URL('../assets/question.svg', import.meta.url).href;
 // EXPORT (so make available to other documents that reference this file) a class, that extends LitElement
@@ -25,6 +26,17 @@ export class SciCard extends SimpleColors {
     this.type = '';
     this.accentColor = 'blue';
     this.dark = 'false';
+    this.mainheader = 'This is the main header.';
+    this.subheader = 'This is the subheader.';
+
+    if (this.getAttribute('icon') != null) {
+      const sketchTag = document.createElement('beaker');
+      sketchTag.innerHTML = this.getAttribute('icon');
+      this.appendChild(sketchTag);
+      setTimeout(() => {
+        import('./SciCardIcon.js');
+      }, 0);
+    }
 
     // document.querySelector('#cardFrame').addEventListener('toggle', event => {
     //   if (document.querySelector('#cardFrame').open) {
@@ -44,6 +56,8 @@ export class SciCard extends SimpleColors {
       // attribute helps us bind the JS spec for variables names to the HTML spec
       // <learning-card my-icon="whatever" will set this.myIcon to "whatever"
       myIcon: { type: String, attribute: 'my-icon' },
+      mainheader: { type: String },
+      subheader: { type: String },
     };
   }
 
@@ -53,6 +67,18 @@ export class SciCard extends SimpleColors {
     changedProperties.forEach((oldValue, propName) => {
       if (propName === 'type' && this[propName] === 'science') {
         this.myIcon = 'beaker';
+        this.mainheader = 'Unit 1';
+        this.subheader = 'Chem Connection';
+      }
+      if (propName === 'type' && this[propName] === 'objective') {
+        this.myIcon = 'lightbulb';
+        this.mainheader = 'Unit 1';
+        this.subheader = 'Learning Objectives';
+      }
+      if (propName === 'type' && this[propName] === 'fact') {
+        this.myIcon = 'question';
+        this.mainheader = 'Unit 1';
+        this.subheader = 'Did you know?';
       }
     });
   }
@@ -77,23 +103,23 @@ export class SciCard extends SimpleColors {
     super.disconnectedCallback();
   }
 
-  _rotateIcon() {
-    // console.log(this);
-    if (!this.shadowRoot.querySelector('details').open) {
-      this.shadowRoot.querySelector('summary').style.listStyleImage =
-        "url('../assets/arrow-down.svg')";
-    } else {
-      this.shadowRoot.querySelector('summary').style.listStyleImage =
-        "url('../assets/arrow-right.svg')";
-    }
+  // _rotateIcon() {
+  //   // console.log(this);
+  //   if (!this.shadowRoot.querySelector('details').open) {
+  //     this.shadowRoot.querySelector('summary').style.listStyleImage =
+  //       "url('../assets/arrow-down.svg')";
+  //   } else {
+  //     this.shadowRoot.querySelector('summary').style.listStyleImage =
+  //       "url('../assets/arrow-right.svg')";
+  //   }
 
-    // if (this.open) {
-    //   document.querySelector('summary::marker').style.transform = 'rotate(-90deg)';
-    // } else {
-    //   console.log("hi");
-    //   // document.querySelector('summary::marker').style.transform = 'rotate(90deg)';
-    // }
-  }
+  //   // if (this.open) {
+  //   //   document.querySelector('summary::marker').style.transform = 'rotate(-90deg)';
+  //   // } else {
+  //   //   console.log("hi");
+  //   //   // document.querySelector('summary::marker').style.transform = 'rotate(90deg)';
+  //   // }
+  // }
 
   // CSS - specific to Lit
   static get styles() {
@@ -117,6 +143,7 @@ export class SciCard extends SimpleColors {
         summary {
           list-style-position: inside;
           list-style-image: url('../assets/arrow-right.svg');
+          display: flex;
         }
         #drawerContents {
           display: flex;
@@ -126,6 +153,7 @@ export class SciCard extends SimpleColors {
         }
         #cardFrame {
           box-shadow: 4px 4px 7px 0px rgba(128, 0, 0, 1);
+          margin: 30px 0px;
         }
         /* summary:hover {
           background-color: var(--simple-colors-default-theme-orange-6);
@@ -137,8 +165,6 @@ export class SciCard extends SimpleColors {
   // HTML - specific to Lit
   render() {
     return html`
-      <h1>SciCard</h1>
-      <div>${this.type}</div>
       <div id="cardFrame">
         <details>
           <summary @click="${this._rotateIcon}" part="banner">
@@ -149,15 +175,18 @@ export class SciCard extends SimpleColors {
             >
               <slot name="header"></slot>
             </div>
-            <img part="icon" src="${beaker}" alt="" />
-            <div
+            <!-- <div
               class="slot-wrapper"
               data-label="Content"
               data-layout-slotname="content"
-            >
-              <slot name="content"></slot>
+            > -->
+            <sci-card-banner>
+              <div slot="main-header">${this.mainheader}</div>
+              <div slot="sub-header">${this.subheader}</div>
+            </sci-card-banner>
+            <!-- <slot name="content"></slot>
               <slot></slot>
-            </div>
+            </div> -->
           </summary>
           <div id="drawerContents">
             <ul>
@@ -167,6 +196,9 @@ export class SciCard extends SimpleColors {
           </div>
         </details>
       </div>
+      <script type="module">
+        import './src/app.js';
+      </script>
     `;
   }
 
