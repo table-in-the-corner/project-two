@@ -1,6 +1,6 @@
 // dependencies / things imported
 import { LitElement, html, css } from 'lit';
-import './sci-card-banner.js';
+import './SciCardBanner.js';
 // this is the base path to the assets calculated at run time
 // this ensures that assets are shipped correctly when building the demo
 // on github pages, or when people reuse assets outside your elements in production
