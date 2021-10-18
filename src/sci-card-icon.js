@@ -1,7 +1,7 @@
 import { html, css } from 'lit';
 import { SimpleColors } from "@lrnwebcomponents/simple-colors/simple-colors.js";
 
-export class LearningIcon extends SimpleColors {
+export class SciCardIcon extends SimpleColors {
     static get tag() {
         return 'sci-card-icon';
     }
@@ -23,4 +23,4 @@ export class LearningIcon extends SimpleColors {
         return html`<div>Icon Stuff<slot></slot><div>`;
     }
 }
-window.customElements.define(LearningIcon.tag, LearningIcon);
+window.customElements.define(SciCardIcon.tag, SciCardIcon);
