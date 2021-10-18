@@ -103,6 +103,9 @@ These are dedicated status check-ins as this is a multi-week project
 
 ### Check-in 2
 - For Check-in 2, we worked to create a scaffold for a basic API for the overall card.  From there, we integrated in the header/banner element with an icon modeled after the example provided and supporting two named slots (main header and sub header).  Lastly, we worked to dynamically import the icon definition in the life-cycle of the header/banner element.
+- Good inital start on project
+- Continue work with Banner, Icon, and Scaffold
+- collaborated as a team
 
 ### Check-in 3
 - 
