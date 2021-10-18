@@ -102,8 +102,8 @@ These are dedicated status check-ins as this is a multi-week project
   - Noelle: Research on flexbox and how to appropriately contain different types of content in the same card body area. This includes text content, images, and and potentially iFrames. Would conditional rendering be enough, or would this create issues with resposiveness of content relative to the card scaffolding?
 
 ### Check-in 2
-- 
-- 
+- For Check-in 2, we worked to create a scaffold for a basic API for the overall card.  From there, we integrated in the header/banner element with an icon modeled after the example provided and supporting two named slots (main header and sub header).  Lastly, we worked to dynamically import the icon definition in the life-cycle of the header/banner element.
+
 ### Check-in 3
 - 
 - 
