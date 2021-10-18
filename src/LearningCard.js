@@ -1,6 +1,6 @@
 // dependencies / things imported
 import { LitElement, html, css } from 'lit';
-
+import './sci-card-banner.js';
 // this is the base path to the assets calculated at run time
 // this ensures that assets are shipped correctly when building the demo
 // on github pages, or when people reuse assets outside your elements in production
@@ -87,6 +87,7 @@ export class LearningCard extends LitElement {
   // HTML - specific to Lit
   render() {
     return html`
+      <sci-card-banner></sci-card-banner>
       <h1>cool</h1>
       <div>${this.type}</div>
       <div>

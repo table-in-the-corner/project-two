@@ -48,6 +48,18 @@ These are notes to be maintained PER date that you meet. What you did and what t
 - sci-card-icon -> Nicole
 - sci-card-content-body -> Noelle
 
+## October 14
+#### What did you take away from the portion of class about implementing SimpleColors?
+-	It seems like a simpler way to add and balance coloring in the project.
+-	Very valuable functionality to extend a functional dark theme that reverses colors out of the box.
+#### What did you learn from other groups?
+-	I learned that there is an extra layer of difficulty in if you copy and paste from the template for each element vs if you pull pieces of the code out as you need them to get it to work as expected.
+-	I learned more my portion of the project being the icon. I worked with the other people in the groups who were also working on the icon section and learned what they are doing and told them about what my ideas were.
+-	I also learned that it's important to think of each of the four elements modularly, to think about how their spacing and function will interact within the scaffolded bounds of the card. 
+#### What are your next steps?
+-	Get the basic header/banner working
+-	Get the basic icon working
+-	Work on developing our expandable card scaffold via using the details and summary tags which support expandable content natively.
 
 ## Status check ins
 These are dedicated status check-ins as this is a multi-week project
