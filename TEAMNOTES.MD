@@ -61,6 +61,19 @@ These are notes to be maintained PER date that you meet. What you did and what t
 -	Get the basic icon working
 -	Work on developing our expandable card scaffold via using the details and summary tags which support expandable content natively.
 
+## October 19
+#### What approaches can you leverage from his example to enhance your team's element?
+- different rendering functions
+- css styles
+- responsive design (proportions)
+#### How could you take his approach and envision a more flexible version?
+- implement the slot within a slot approach as shown in class to make it more flexible
+- refine the different rendering functions to reduce repetitive code
+#### What are your next steps?
+- update css
+- responsive design
+- icon changes
+
 ## Status check ins
 These are dedicated status check-ins as this is a multi-week project
 ### Check-in 1
