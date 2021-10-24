@@ -1,18 +1,28 @@
 import { LitElement, html, css } from 'lit';
 import './SciCard.js';
 
-export class CardFrame extends LitElement{
-    static get tag(){
+export class CardFrame extends LitElement {
+  static get tag() {
     return 'card-frame';
-}
+  }
 
+  // constructor(){
+  //     super();
+  // }
 
-render(){
+  static get properties() {
+    return {};
+  }
+
+  static get styles() {
+    return css``;
+  }
+
+  render() {
     return html`
-    <div>
-        <sci-card></sci-card>
-    </div>
-    
+      <div>
+        <sci-card type="${this.myCard}"> </sci-card>
+      </div>
     `;
-    }
+  }
 }
