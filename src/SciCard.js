@@ -167,7 +167,7 @@ export class SciCard extends SimpleColors {
     return html`
       <div id="cardFrame">
         <details>
-          <summary @click="${this._rotateIcon}" part="banner">
+          <summary part="banner">
             <div
               class="slot-wrapper"
               data-label="Header"
@@ -181,8 +181,12 @@ export class SciCard extends SimpleColors {
               data-layout-slotname="content"
             > -->
             <sci-card-banner>
-              <div slot="main-header">${this.mainheader}</div>
-              <div slot="sub-header">${this.subheader}</div>
+              <div slot="main-header">
+                <slot name="header">${this.mainheader}</slot>
+              </div>
+              <div slot="sub-header">
+                <slot name="header">${this.subheader}</slot>
+              </div>
             </sci-card-banner>
             <!-- <slot name="content"></slot>
               <slot></slot>
