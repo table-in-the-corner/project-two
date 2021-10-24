@@ -1,5 +1,6 @@
 import { html, css } from 'lit';
 import { SimpleColors } from '@lrnwebcomponents/simple-colors/simple-colors.js';
+import './SciCardIcon.js';
 
 // const beaker = new URL('../assets/beaker.svg', import.meta.url).href;
 // const lightbulb = new URL('../assets/lightbulb.svg', import.meta.url).href;
