@@ -1,7 +1,6 @@
 // dependencies / things imported
 import { html, css } from 'lit';
 import { SimpleColors } from '@lrnwebcomponents/simple-colors/simple-colors.js';
-import './SciCardBanner.js';
 
 // this is the base path to the assets calculated at run time
 // this ensures that assets are shipped correctly when building the demo
@@ -30,7 +29,7 @@ export class SciCard extends SimpleColors {
     this.subheader = 'This is the subheader.';
 
     if (this.getAttribute('icon') != null) {
-      const sketchTag = document.createElement('beaker');
+      const sketchTag = document.createElement('sci-card-icon');
       sketchTag.innerHTML = this.getAttribute('icon');
       this.appendChild(sketchTag);
       setTimeout(() => {
@@ -173,20 +172,16 @@ export class SciCard extends SimpleColors {
               data-label="Header"
               data-layout-slotname="header"
             >
-              <slot name="header"></slot>
+              <!-- <slot name="header"></slot> -->
+              <sci-card-banner my-icon="${this.myIcon}" type="${this.type}">
+                <div slot="main-header">
+                  <slot name="mainheader">${this.mainheader}</slot>
+                </div>
+                <div slot="sub-header">
+                  <slot name="subheader">${this.subheader}</slot>
+                </div>
+              </sci-card-banner>
             </div>
-            <!-- <div
-              class="slot-wrapper"
-              data-label="Content"
-              data-layout-slotname="content"
-            > -->
-            <sci-card-banner>
-              <div slot="main-header">${this.mainheader}</div>
-              <div slot="sub-header">${this.subheader}</div>
-            </sci-card-banner>
-            <!-- <slot name="content"></slot>
-              <slot></slot>
-            </div> -->
           </summary>
           <div id="drawerContents">
             <ul>

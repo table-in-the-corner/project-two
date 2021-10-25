@@ -1,8 +1,8 @@
 import { html, css } from 'lit';
 import { SimpleColors } from '@lrnwebcomponents/simple-colors/simple-colors.js';
 
-// const beaker = new URL('../assets/beaker.svg', import.meta.url).href;
-// const lightbulb = new URL('../assets/lightbulb.svg', import.meta.url).href;
+const beaker = new URL('../assets/beaker.svg', import.meta.url).href;
+const lightbulb = new URL('../assets/lightbulb.svg', import.meta.url).href;
 const question = new URL('../assets/question.svg', import.meta.url).href;
 
 export class SciCardIcon extends SimpleColors {
@@ -18,20 +18,20 @@ export class SciCardIcon extends SimpleColors {
         this.myIcon = 'beaker';
       }
       if (propName === 'type' && this[propName] === 'objective') {
-        this.myIcon = 'lightbulb';
+        this.myIcon = lightbulb;
       }
       if (propName === 'type' && this[propName] === 'fact') {
         this.myIcon = 'question';
       }
-      if (propName === 'type' && this[propName] === 'beaker') {
-        this.myIcon = this.beaker;
-      }
-      if (propName === 'type' && this[propName] === 'lightbulb') {
-        this.myIcon = this.lightbulb;
-      }
-      if (propName === 'type' && this[propName] === 'question') {
-        this.myIcon = this.question;
-      }
+      // if (propName === 'type' && this[propName] === 'beaker') {
+      //   this.myIcon = 'beaker';
+      // }
+      // if (propName === 'type' && this[propName] === 'lightbulb') {
+      //   this.myIcon = 'lightbulb';
+      // }
+      // if (propName === 'type' && this[propName] === 'question') {
+      //   this.myIcon = 'question';
+      // }
     });
   }
 
@@ -77,6 +77,7 @@ export class SciCardIcon extends SimpleColors {
     super();
     this.accentColor = 'green';
     this.dark = false;
+    this.myIcon = null;
   }
 
   static get properties() {
@@ -155,10 +156,27 @@ export class SciCardIcon extends SimpleColors {
 
   render() {
     // return html`<div>This is my ${this.title} and this is ${this.header}<slot></slot></div>`;
-    return html`
-      <div id="bannerElement">
-        <img part="icon" src="${question}" alt="" />
-      </div>
-    `;
+    if (this.myIcon === 'lightbulb') {
+      return html`
+        <div id="bannerElement">
+          <img part="icon" src="${lightbulb}" alt="" />
+        </div>
+      `;
+    }
+    if (this.myIcon === 'beaker') {
+      return html`
+        <div id="bannerElement">
+          <img part="icon" src="${beaker}" alt="" />
+        </div>
+      `;
+    }
+    if (this.myIcon === 'question') {
+      return html`
+        <div id="bannerElement">
+          <img part="icon" src="${question}" alt="" />
+        </div>
+      `;
+    }
+    return null;
   }
 }
