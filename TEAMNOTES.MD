@@ -122,8 +122,9 @@ These are dedicated status check-ins as this is a multi-week project
 - Nicole: Planned out icon handling and API rendering
 - Noelle: Helped with card content layout and research. She was ill and out of class for most of the week so she is getting reintegrated to Project 2 as well.
 ### Check-in 3
-- As of this point, we've worked to create a scaffold for the overall card, banner elements, and the icon. We spent time reviewing comments from the last check-in and class discussion to improve our elements.  All of the elements have been started, the icon element is almost finished, the header/banner element is looking like the example, and the card scaffolding is being worked on.
+- As of this point, we've worked to create a scaffold for the overall card, banner elements, and the icon. We spent time reviewing comments from the last check-in and class discussion to improve our elements.  All of the elements have been started, the icon element is essentially finished and is dynamically rendering, the header/banner element is looking like the example, and the card scaffolding is being worked on.
 - A problem we faced was determining how we wanted the overall scaffolding of the card to work, but through discussion in class and within our group, the structure was figured out.
+- Our team chose to implement a custom Google font (Open Sans) as part of our blog post, utilizing the swap functionality provided by Lit.
 - Our next steps will be to continue to work on improving the card given the feedback and discussion in class this week. We will work on improving the CSS styling for the card and start to look at what it would look like to implement our button from the last assignment within this card.
 ### Check-in 4
 - 
