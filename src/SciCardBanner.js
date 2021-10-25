@@ -67,8 +67,19 @@ export class SciCardBanner extends SimpleColors {
 
   constructor() {
     super();
+    this.type = '';
+    this.myIcon = null;
     this.accentColor = 'green';
     this.dark = false;
+
+    if (this.getAttribute('icon') != null) {
+      const sketchTag = document.createElement('sci-card-icon');
+      sketchTag.innerHTML = this.getAttribute('icon');
+      this.appendChild(sketchTag);
+      setTimeout(() => {
+        import('./SciCardIcon.js');
+      }, 0);
+    }
   }
 
   static get properties() {
@@ -139,7 +150,8 @@ export class SciCardBanner extends SimpleColors {
     return html`
       <div id="bannerElement">
         <sci-card-icon
-          icon="${this.myIcon}"
+          icon="test"
+          my-icon="${this.myIcon}"
           type="${this.myIcon}"
         ></sci-card-icon>
         <div id="banner">
@@ -149,6 +161,10 @@ export class SciCardBanner extends SimpleColors {
           </div>
         </div>
       </div>
+      <script type="module">
+        import './src/app.js';
+        import './src/SciCardIcon.js';
+      </script>
     `;
   }
 }
