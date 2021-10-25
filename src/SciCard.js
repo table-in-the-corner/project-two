@@ -166,7 +166,7 @@ export class SciCard extends SimpleColors {
     return html`
       <div id="cardFrame">
         <details>
-          <summary @click="${this._rotateIcon}" part="banner">
+          <summary part="banner">
             <div
               class="slot-wrapper"
               data-label="Header"
