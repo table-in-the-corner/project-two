@@ -25,6 +25,7 @@ export class SciCard extends SimpleColors {
     this.type = '';
     this.accentColor = 'blue';
     this.dark = 'false';
+    this.openState = false;
     this.mainheader = 'This is the main header.';
     this.subheader = 'This is the subheader.';
 
@@ -36,6 +37,8 @@ export class SciCard extends SimpleColors {
         import('./SciCardIcon.js');
       }, 0);
     }
+
+    // if (document.querySelector("#cardFrame").clientWidth < "320px")
 
     // document.querySelector('#cardFrame').addEventListener('toggle', event => {
     //   if (document.querySelector('#cardFrame').open) {
@@ -57,6 +60,7 @@ export class SciCard extends SimpleColors {
       myIcon: { type: String, attribute: 'my-icon' },
       mainheader: { type: String },
       subheader: { type: String },
+      openState: { type: Boolean },
     };
   }
 
@@ -80,6 +84,10 @@ export class SciCard extends SimpleColors {
         this.subheader = 'Did you know?';
       }
     });
+    if (this.shadowRoot.querySelector('#cardFrame').clientWidth < 320) {
+      this.openState = true;
+      this.shadowRoot.querySelector('details').open();
+    }
   }
 
   // Lit life-cycle; this fires the 1st time the element is rendered on the screen
@@ -94,6 +102,7 @@ export class SciCard extends SimpleColors {
   // this fires EVERY time the element is moved
   connectedCallback() {
     super.connectedCallback();
+    window.addEventListener('resize', this.stateToggle);
   }
 
   // HTMLElement life-cycle, element has been removed from the page OR moved
@@ -119,6 +128,30 @@ export class SciCard extends SimpleColors {
   //   //   // document.querySelector('summary::marker').style.transform = 'rotate(90deg)';
   //   // }
   // }
+
+  stateToggle() {
+    if (
+      this.document
+        .querySelector('div')
+        .querySelector('card-frame')
+        .shadowRoot.querySelector('sci-card').clientWidth < 320
+    ) {
+      this.document
+        .querySelector('div')
+        .querySelector('card-frame')
+        .shadowRoot.querySelector('sci-card')
+        .shadowRoot.querySelector('#cardFrame')
+        .querySelector('details').open = true;
+      this.openState = true;
+    } else {
+      this.document
+        .querySelector('div')
+        .querySelector('card-frame')
+        .shadowRoot.querySelector('sci-card')
+        .shadowRoot.querySelector('#cardFrame')
+        .querySelector('details').open = false;
+    }
+  }
 
   // CSS - specific to Lit
   static get styles() {
@@ -164,8 +197,8 @@ export class SciCard extends SimpleColors {
   // HTML - specific to Lit
   render() {
     return html`
-      <div id="cardFrame">
-        <details>
+      <div id="cardFrame" onresize="stateToggle()">
+        <details ?open=${this.openState}>
           <summary part="banner">
             <div
               class="slot-wrapper"

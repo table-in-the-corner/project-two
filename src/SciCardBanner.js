@@ -140,6 +140,30 @@ export class SciCardBanner extends SimpleColors {
         #bannerElement {
           display: flex;
           flex-direction: row;
+          justify-content: center;
+        }
+        sci-card-icon {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+        }
+
+        @media screen and (min-width: 320px) {
+          #main-header {
+            font-size: 1rem;
+          }
+          #sub-header {
+            font-size: 2rem;
+          }
+        }
+
+        @media screen and (min-width: 920px) {
+          #main-header {
+            font-size: 2rem;
+          }
+          #sub-header {
+            font-size: 3rem;
+          }
         }
       `,
     ];

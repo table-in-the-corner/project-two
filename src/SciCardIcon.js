@@ -150,6 +150,20 @@ export class SciCardIcon extends SimpleColors {
           display: flex;
           flex-direction: row;
         }
+
+        @media screen and (min-width: 320px) {
+          img {
+            height: 75px;
+            width: 75px;
+          }
+        }
+
+        @media screen and (min-width: 920px) {
+          img {
+            height: 150px;
+            width: 150px;
+          }
+        }
       `,
     ];
   }
