@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html } from 'lit';
 import './SciCard.js';
 
 export class CardFrame extends LitElement {
@@ -37,20 +37,6 @@ export class CardFrame extends LitElement {
         this.subheader = 'Did you know?';
       }
     });
-  }
-
-  static get styles() {
-    return css`
-      sci-card[type='objective']::part(banner) {
-        background-color: darkorange;
-      }
-      sci-card[type='science']::part(banner) {
-        background-color: seagreen;
-      }
-      sci-card[type='fact']::part(banner) {
-        background-color: slateblue;
-      }
-    `;
   }
 
   render() {

@@ -57,6 +57,7 @@ export class SciCard extends SimpleColors {
       myIcon: { type: String, attribute: 'my-icon' },
       mainheader: { type: String },
       subheader: { type: String },
+      accentColor: { type: String, attribute: 'accent-color' },
     };
   }
 
@@ -68,16 +69,19 @@ export class SciCard extends SimpleColors {
         this.myIcon = 'beaker';
         this.mainheader = 'Unit 1';
         this.subheader = 'Chem Connection';
+        this.accentColor = 'seagreen';
       }
       if (propName === 'type' && this[propName] === 'objective') {
         this.myIcon = 'lightbulb';
         this.mainheader = 'Unit 1';
         this.subheader = 'Learning Objectives';
+        this.accentColor = 'darkorange';
       }
       if (propName === 'type' && this[propName] === 'fact') {
         this.myIcon = 'question';
         this.mainheader = 'Unit 1';
         this.subheader = 'Did you know?';
+        this.accentColor = 'slateblue';
       }
     });
   }
@@ -128,6 +132,7 @@ export class SciCard extends SimpleColors {
         :host {
           display: block;
           --learning-objective-primary-color: orange-5;
+          --sci-card-banner-color: blue;
         }
         /* this is how you match something on the tag itself like <learning-card type="math"> and then style the img inside */
         :host([type='math']) img {
@@ -142,7 +147,7 @@ export class SciCard extends SimpleColors {
         summary {
           list-style-position: inside;
           list-style-image: url('../assets/arrow-right.svg');
-          display: flex;
+          display: block;
         }
         #drawerContents {
           display: flex;
@@ -154,9 +159,9 @@ export class SciCard extends SimpleColors {
           box-shadow: 4px 4px 7px 0px rgba(128, 0, 0, 1);
           margin: 30px 0px;
         }
-        /* summary:hover {
-          background-color: var(--simple-colors-default-theme-orange-6);
-        } */
+        sci-card-banner {
+          background-color: var(--sci-card-banner-color);
+        }
       `,
     ];
   }
@@ -172,8 +177,11 @@ export class SciCard extends SimpleColors {
               data-label="Header"
               data-layout-slotname="header"
             >
-              <!-- <slot name="header"></slot> -->
-              <sci-card-banner my-icon="${this.myIcon}" type="${this.type}">
+              <sci-card-banner
+                my-icon="${this.myIcon}"
+                type="${this.type}"
+                style="--sci-card-banner-color: ${this.accentColor}"
+              >
                 <div slot="main-header">
                   <slot name="mainheader">${this.mainheader}</slot>
                 </div>
