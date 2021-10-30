@@ -17,28 +17,6 @@ export class CardFrame extends LitElement {
     };
   }
 
-  // updated fires every time a property defined above changes
-  // this allows you to react to variables changing and use javascript to perform logic
-  updated(changedProperties) {
-    changedProperties.forEach((oldValue, propName) => {
-      if (propName === 'type' && this[propName] === 'science') {
-        this.myIcon = 'beaker';
-        this.mainheader = 'Unit 1';
-        this.subheader = 'Chem Connection';
-      }
-      if (propName === 'type' && this[propName] === 'objective') {
-        // this.myIcon = 'lightbulb';
-        // this.mainheader = 'Unit 1';
-        // this.subheader = 'Learning Objectives';
-      }
-      if (propName === 'type' && this[propName] === 'fact') {
-        this.myIcon = 'question';
-        this.mainheader = 'Unit 1';
-        this.subheader = 'Did you know?';
-      }
-    });
-  }
-
   render() {
     return html`
       <div>
