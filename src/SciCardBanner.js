@@ -13,12 +13,20 @@ export class SciCardBanner extends SimpleColors {
     changedProperties.forEach((oldValue, propName) => {
       if (propName === 'type' && this[propName] === 'science') {
         this.myIcon = 'beaker';
+        this.accentColor = 'seagreen';
       }
       if (propName === 'type' && this[propName] === 'objective') {
         this.myIcon = 'lightbulb';
+        this.accentColor = 'darkorange';
       }
       if (propName === 'type' && this[propName] === 'fact') {
         this.myIcon = 'question';
+        this.accentColor = 'slateblue';
+      }
+      // used for storybook when a type above isn't selected
+      if (propName === 'type' && this[propName] === '') {
+        this.myIcon = 'lightbulb';
+        this.accentColor = 'purple';
       }
     });
   }
@@ -57,7 +65,8 @@ export class SciCardBanner extends SimpleColors {
   constructor() {
     super();
     this.type = '';
-    this.myIcon = null;
+    this.myIcon = 'lightbulb';
+    this.accentColor = 'blue';
 
     if (this.getAttribute('icon') != null) {
       const sketchTag = document.createElement('sci-card-icon');
@@ -74,6 +83,7 @@ export class SciCardBanner extends SimpleColors {
       ...super.properties,
       type: { type: String, reflect: true },
       myIcon: { type: String, attribute: 'my-icon' },
+      accentColor: { type: String, attribute: 'accent-color' },
     };
   }
 
@@ -83,6 +93,10 @@ export class SciCardBanner extends SimpleColors {
       css`
         :host {
           display: block;
+          margin: 0;
+          font-family: 'Open Sans', sans-serif;
+          font-display: swap;
+          background-color: var(--simple-colors-default-theme-indigo-6);
         }
         #banner {
           display: flex;
@@ -114,13 +128,25 @@ export class SciCardBanner extends SimpleColors {
           display: flex;
           flex-direction: row;
         }
+        :host([type='science']) {
+          background-color: var(--simple-colors-default-theme-green-7);
+        }
+        :host([type='objective']) {
+          background-color: var(--simple-colors-default-theme-orange-6);
+        }
+        :host([type='fact']) {
+          background-color: var(--simple-colors-default-theme-light-blue-8);
+        }
       `,
     ];
   }
 
   render() {
     return html`
-      <div id="bannerElement">
+      <div
+        id="bannerElement"
+        style="--sci-card-banner-color: ${this.accentColor}"
+      >
         <sci-card-icon
           icon="test"
           my-icon="${this.myIcon}"

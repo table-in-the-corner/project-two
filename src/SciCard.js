@@ -23,10 +23,9 @@ export class SciCard extends SimpleColors {
     super();
     this.myIcon = null;
     this.type = '';
-    this.accentColor = 'blue';
-    this.dark = 'false';
-    this.mainheader = 'This is the main header.';
-    this.subheader = 'This is the subheader.';
+    this.dark = false;
+    this.mainheader = 'Unit 1';
+    this.subheader = 'Learning Objectives';
 
     if (this.getAttribute('icon') != null) {
       const sketchTag = document.createElement('sci-card-icon');
@@ -50,14 +49,10 @@ export class SciCard extends SimpleColors {
   // properties that you wish to use as data in HTML, CSS, and the updated life-cycle
   static get properties() {
     return {
-      // reflect allows state changes to the element's property to be leveraged in CSS selectors
       type: { type: String, reflect: true },
-      // attribute helps us bind the JS spec for variables names to the HTML spec
-      // <learning-card my-icon="whatever" will set this.myIcon to "whatever"
       myIcon: { type: String, attribute: 'my-icon' },
       mainheader: { type: String },
       subheader: { type: String },
-      accentColor: { type: String, attribute: 'accent-color' },
     };
   }
 
@@ -69,19 +64,16 @@ export class SciCard extends SimpleColors {
         this.myIcon = 'beaker';
         this.mainheader = 'Unit 1';
         this.subheader = 'Chem Connection';
-        this.accentColor = 'seagreen';
       }
       if (propName === 'type' && this[propName] === 'objective') {
         this.myIcon = 'lightbulb';
         this.mainheader = 'Unit 1';
         this.subheader = 'Learning Objectives';
-        this.accentColor = 'darkorange';
       }
       if (propName === 'type' && this[propName] === 'fact') {
         this.myIcon = 'question';
         this.mainheader = 'Unit 1';
         this.subheader = 'Did you know?';
-        this.accentColor = 'slateblue';
       }
     });
   }
@@ -131,12 +123,6 @@ export class SciCard extends SimpleColors {
       css`
         :host {
           display: block;
-          --learning-objective-primary-color: orange-5;
-          --sci-card-banner-color: blue;
-        }
-        /* this is how you match something on the tag itself like <learning-card type="math"> and then style the img inside */
-        :host([type='math']) img {
-          background-color: purple;
         }
         img {
           display: inline-flex;
@@ -159,9 +145,6 @@ export class SciCard extends SimpleColors {
           box-shadow: 4px 4px 7px 0px rgba(128, 0, 0, 1);
           margin: 30px 0px;
         }
-        sci-card-banner {
-          background-color: var(--sci-card-banner-color);
-        }
       `,
     ];
   }
@@ -177,11 +160,7 @@ export class SciCard extends SimpleColors {
               data-label="Header"
               data-layout-slotname="header"
             >
-              <sci-card-banner
-                my-icon="${this.myIcon}"
-                type="${this.type}"
-                style="--sci-card-banner-color: ${this.accentColor}"
-              >
+              <sci-card-banner my-icon="${this.myIcon}" type="${this.type}">
                 <div slot="main-header">
                   <slot name="mainheader">${this.mainheader}</slot>
                 </div>
@@ -217,7 +196,7 @@ export class SciCard extends SimpleColors {
       canEditSource: true,
       contentEditable: true,
       gizmo: {
-        title: 'Learning Card',
+        title: 'Sci Card',
         description: 'An element that you have to replace / fix / improve',
         icon: 'credit-card',
         color: 'blue',
@@ -231,8 +210,9 @@ export class SciCard extends SimpleColors {
             description: 'Identifies the card',
             inputMethod: 'select',
             options: {
-              science: 'Science',
-              math: 'Math',
+              science: 'science',
+              objectives: 'objective',
+              fact: 'fact',
             },
           },
         ],
