@@ -127,5 +127,9 @@ These are dedicated status check-ins as this is a multi-week project
 - Our team chose to implement a custom Google font (Open Sans) as part of our blog post, utilizing the swap functionality provided by Lit.
 - Our next steps will be to continue to work on improving the card given the feedback and discussion in class this week. We will work on improving the CSS styling for the card and start to look at what it would look like to implement our button from the last assignment within this card.
 ### Check-in 4
-- 
-- 
+- For this check in, we worked to finish up some of the things we've been working on including adding the use of simple colors and the button from the last project.
+- We also created the storyboard for the project and added a default card style for when one of the 3 types is not selected
+- Things we need to do (may or may not be done for this check in)
+  - make expanded by default
+  - finish adding button
+  - create tests
