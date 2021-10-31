@@ -27,6 +27,7 @@ export class SciCard extends SimpleColors {
     this.dark = false;
     this.mainheader = 'Unit 1';
     this.subheader = 'Learning Objectives';
+    this.openState = true;
 
     if (this.getAttribute('icon') != null) {
       const sketchTag = document.createElement('sci-card-icon');
@@ -36,6 +37,8 @@ export class SciCard extends SimpleColors {
         import('./SciCardIcon.js');
       }, 0);
     }
+
+    // if (document.querySelector("#cardFrame").clientWidth < "320px")
 
     // document.querySelector('#cardFrame').addEventListener('toggle', event => {
     //   if (document.querySelector('#cardFrame').open) {
@@ -54,6 +57,7 @@ export class SciCard extends SimpleColors {
       myIcon: { type: String, attribute: 'my-icon' },
       mainheader: { type: String },
       subheader: { type: String },
+      openState: { type: Boolean },
     };
   }
 
@@ -94,6 +98,7 @@ export class SciCard extends SimpleColors {
   // this fires EVERY time the element is moved
   connectedCallback() {
     super.connectedCallback();
+    window.addEventListener('resize', this.stateToggle);
   }
 
   // HTMLElement life-cycle, element has been removed from the page OR moved
@@ -119,6 +124,38 @@ export class SciCard extends SimpleColors {
   //   //   // document.querySelector('summary::marker').style.transform = 'rotate(90deg)';
   //   // }
   // }
+
+  /* eslint-disable no-param-reassign */
+  stateToggle() {
+    // console.log(this.shadowRoot.querySelector('details'))
+    // https://stackoverflow.com/questions/52365938/get-all-elements-containing-a-class-with-queryselector
+    if (
+      this.window.document
+        .querySelector('card-frame')
+        .shadowRoot.querySelector('sci-card').clientWidth < 320
+    ) {
+      this.openState = false;
+      const nodeList = this.window.document.querySelectorAll('card-frame');
+      nodeList.forEach(el => {
+        el.shadowRoot
+          .querySelector('sci-card')
+          .shadowRoot.querySelector('details').open = this.openState;
+      });
+
+      // this.window.document.querySelector('card-frame').shadowRoot.querySelector('sci-card').shadowRoot.querySelector('details').open = this.openState
+    } else {
+      this.openState = true;
+      const nodeList2 = this.window.document.querySelectorAll('card-frame');
+      nodeList2.forEach(el => {
+        el.shadowRoot
+          .querySelector('sci-card')
+          .shadowRoot.querySelector('details').open = this.openState;
+      });
+
+      // this.window.document.querySelector('card-frame').shadowRoot.querySelector('sci-card').shadowRoot.querySelector('details').open = true
+    }
+  }
+  /* eslint-enable no-param-reassign */
 
   // CSS - specific to Lit
   static get styles() {
@@ -174,7 +211,7 @@ export class SciCard extends SimpleColors {
   render() {
     return html`
       <div id="cardFrame">
-        <details open>
+        <details .open=${this.openState}>
           <summary part="banner">
             <div
               class="slot-wrapper"
