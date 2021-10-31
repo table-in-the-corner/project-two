@@ -2,10 +2,6 @@ import { html, css } from 'lit';
 import { SimpleColors } from '@lrnwebcomponents/simple-colors/simple-colors.js';
 import './SciCardIcon.js';
 
-// const beaker = new URL('../assets/beaker.svg', import.meta.url).href;
-// const lightbulb = new URL('../assets/lightbulb.svg', import.meta.url).href;
-// const question = new URL('../assets/question.svg', import.meta.url).href;
-
 export class SciCardBanner extends SimpleColors {
   static get tag() {
     return 'sci-card-banner';
@@ -17,12 +13,20 @@ export class SciCardBanner extends SimpleColors {
     changedProperties.forEach((oldValue, propName) => {
       if (propName === 'type' && this[propName] === 'science') {
         this.myIcon = 'beaker';
+        this.accentColor = 'seagreen';
       }
       if (propName === 'type' && this[propName] === 'objective') {
         this.myIcon = 'lightbulb';
+        this.accentColor = 'darkorange';
       }
       if (propName === 'type' && this[propName] === 'fact') {
         this.myIcon = 'question';
+        this.accentColor = 'slateblue';
+      }
+      // used for storybook when a type above isn't selected
+      if (propName === 'type' && this[propName] === '') {
+        this.myIcon = 'lightbulb';
+        this.accentColor = 'purple';
       }
     });
   }
@@ -56,21 +60,13 @@ export class SciCardBanner extends SimpleColors {
       this.shadowRoot.querySelector('summary').style.listStyleImage =
         "url('../assets/arrow-right.svg')";
     }
-
-    // if (this.open) {
-    //   document.querySelector('summary::marker').style.transform = 'rotate(-90deg)';
-    // } else {
-    //   console.log("hi");
-    //   // document.querySelector('summary::marker').style.transform = 'rotate(90deg)';
-    // }
   }
 
   constructor() {
     super();
     this.type = '';
-    this.myIcon = null;
-    this.accentColor = 'green';
-    this.dark = false;
+    this.myIcon = 'lightbulb';
+    this.accentColor = 'blue';
 
     if (this.getAttribute('icon') != null) {
       const sketchTag = document.createElement('sci-card-icon');
@@ -85,11 +81,9 @@ export class SciCardBanner extends SimpleColors {
   static get properties() {
     return {
       ...super.properties,
-      // reflect allows state changes to the element's property to be leveraged in CSS selectors
       type: { type: String, reflect: true },
-      // attribute helps us bind the JS spec for variables names to the HTML spec
-      // <learning-card my-icon="whatever" will set this.myIcon to "whatever"
       myIcon: { type: String, attribute: 'my-icon' },
+      accentColor: { type: String, attribute: 'accent-color' },
     };
   }
 
@@ -99,16 +93,10 @@ export class SciCardBanner extends SimpleColors {
       css`
         :host {
           display: block;
-          --sci-card-banner-color1: darkorange;
-          --sci-card-banner-color2: green;
-          --sci-card-banner-color3: blue;
-          /* font-family: 'Open Sans', sans-serif; */
-        }
-        img {
-          display: inline-flex;
-          height: var(--sci-card-height, 150px);
-          width: var(--sci-card-width, 150px);
-          background-color: transparent;
+          margin: 0;
+          font-family: 'Open Sans', sans-serif;
+          font-display: swap;
+          background-color: var(--simple-colors-default-theme-indigo-6);
         }
         #banner {
           display: flex;
@@ -136,19 +124,29 @@ export class SciCardBanner extends SimpleColors {
           text-transform: uppercase;
           font-weight: 500;
         }
-
         #bannerElement {
           display: flex;
           flex-direction: row;
+        }
+        :host([type='science']) {
+          background-color: var(--simple-colors-default-theme-green-7);
+        }
+        :host([type='objective']) {
+          background-color: var(--simple-colors-default-theme-orange-6);
+        }
+        :host([type='fact']) {
+          background-color: var(--simple-colors-default-theme-light-blue-8);
         }
       `,
     ];
   }
 
   render() {
-    // return html`<div>This is my ${this.title} and this is ${this.header}<slot></slot></div>`;
     return html`
-      <div id="bannerElement">
+      <div
+        id="bannerElement"
+        style="--sci-card-banner-color: ${this.accentColor}"
+      >
         <sci-card-icon
           icon="test"
           my-icon="${this.myIcon}"
@@ -161,10 +159,6 @@ export class SciCardBanner extends SimpleColors {
           </div>
         </div>
       </div>
-      <script type="module">
-        import './src/app.js';
-        import './src/SciCardIcon.js';
-      </script>
     `;
   }
 }
