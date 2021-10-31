@@ -127,6 +127,7 @@ export class SciCard extends SimpleColors {
       css`
         :host {
           display: block;
+          min-width: 400px;
         }
         img {
           display: inline-flex;
@@ -173,7 +174,7 @@ export class SciCard extends SimpleColors {
   render() {
     return html`
       <div id="cardFrame">
-        <details>
+        <details open>
           <summary part="banner">
             <div
               class="slot-wrapper"
@@ -195,7 +196,10 @@ export class SciCard extends SimpleColors {
               <li>Test</li>
               <li>Test2</li>
             </ul>
-            <a
+           
+          </div>
+          <div id = "btn">
+          <slot id="button" name="button"></slot><a
               tabindex="-1"
               href="${this.link}"
               target="_blank"
@@ -219,8 +223,8 @@ export class SciCard extends SimpleColors {
                   type="${this.myIcon}"
                 ></sci-card-icon>
               </invisi-button>
-            </a>
-          </div>
+            </a></slot>
+        </div>
         </details>
       </div>
       <script type="module">
