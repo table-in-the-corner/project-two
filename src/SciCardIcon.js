@@ -75,18 +75,13 @@ export class SciCardIcon extends SimpleColors {
 
   constructor() {
     super();
-    this.accentColor = 'green';
-    this.dark = false;
     this.myIcon = null;
   }
 
   static get properties() {
     return {
       ...super.properties,
-      // reflect allows state changes to the element's property to be leveraged in CSS selectors
       type: { type: String, reflect: true },
-      // attribute helps us bind the JS spec for variables names to the HTML spec
-      // <learning-card my-icon="whatever" will set this.myIcon to "whatever"
       myIcon: { type: String, attribute: 'my-icon' },
     };
   }
@@ -97,72 +92,12 @@ export class SciCardIcon extends SimpleColors {
       css`
         :host {
           display: block;
-          --sci-card-banner-color1: darkorange;
-          --sci-card-banner-color2: green;
-          --sci-card-banner-color3: blue;
         }
         img {
           display: inline-flex;
           height: var(--sci-card-height, 150px);
           width: var(--sci-card-width, 150px);
           background-color: transparent;
-        }
-        #banner1 {
-          display: flex;
-          flex-direction: row;
-          justify-content: center;
-          align-items: center;
-          background-color: transparent;
-          color: white;
-        }
-        /* #banner2 {
-          display: flex;
-          flex-direction: row;
-          background-color: var(--sci-card-banner-color2);
-          color: white;
-        }
-        #banner3 {
-          display: flex;
-          flex-direction: row;
-          background-color: var(--sci-card-banner-color3);
-          color: white;
-        } */
-        #headers {
-          padding: 5px;
-          margin: 5px;
-          display: inline-flex;
-          flex-direction: column;
-          justify-content: left;
-          align-items: left;
-        }
-        #main-header {
-          font-size: 200%;
-          text-transform: uppercase;
-          font-weight: 300;
-        }
-        #sub-header {
-          font-size: 250%;
-          text-transform: uppercase;
-          font-weight: 500;
-        }
-
-        #bannerElement {
-          display: flex;
-          flex-direction: row;
-        }
-
-        @media screen and (min-width: 320px) {
-          img {
-            height: 75px;
-            width: 75px;
-          }
-        }
-
-        @media screen and (min-width: 920px) {
-          img {
-            height: 150px;
-            width: 150px;
-          }
         }
       `,
     ];

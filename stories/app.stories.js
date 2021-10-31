@@ -3,24 +3,16 @@ import '../src/app.js';
 
 export default {
   title: 'Project two',
-  component: 'learning-card',
+  component: 'sci-card',
   argTypes: {
-    type: { control: 'text' },
+    type: {
+      options: ['objective', 'science', 'fact'],
+      control: { type: 'select' },
+    },
   },
 };
 
-
-function Template({ type = "math", slot }) {
-  return html`
-    <learning-card type="${type}">
-    ${slot}
-    </learning-card>
-  `;
+function Template({ type }) {
+  return html` <card-frame type="${type}"></card-frame> `;
 }
 export const Card = Template.bind({});
-
-export const ScienceCard = Template.bind({});
-ScienceCard.args = {
-  type: 'science',
-  slot: html`<p>slotted content that should render</p>`
-};

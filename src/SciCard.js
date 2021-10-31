@@ -1,6 +1,7 @@
 // dependencies / things imported
 import { html, css } from 'lit';
 import { SimpleColors } from '@lrnwebcomponents/simple-colors/simple-colors.js';
+import '@table-in-the-corner/invisi-button';
 
 // this is the base path to the assets calculated at run time
 // this ensures that assets are shipped correctly when building the demo
@@ -23,11 +24,10 @@ export class SciCard extends SimpleColors {
     super();
     this.myIcon = null;
     this.type = '';
-    this.accentColor = 'blue';
-    this.dark = 'false';
+    this.dark = false;
+    this.mainheader = 'Unit 1';
+    this.subheader = 'Learning Objectives';
     this.openState = true;
-    this.mainheader = 'This is the main header.';
-    this.subheader = 'This is the subheader.';
 
     if (this.getAttribute('icon') != null) {
       const sketchTag = document.createElement('sci-card-icon');
@@ -53,10 +53,7 @@ export class SciCard extends SimpleColors {
   // properties that you wish to use as data in HTML, CSS, and the updated life-cycle
   static get properties() {
     return {
-      // reflect allows state changes to the element's property to be leveraged in CSS selectors
       type: { type: String, reflect: true },
-      // attribute helps us bind the JS spec for variables names to the HTML spec
-      // <learning-card my-icon="whatever" will set this.myIcon to "whatever"
       myIcon: { type: String, attribute: 'my-icon' },
       mainheader: { type: String },
       subheader: { type: String },
@@ -72,16 +69,19 @@ export class SciCard extends SimpleColors {
         this.myIcon = 'beaker';
         this.mainheader = 'Unit 1';
         this.subheader = 'Chem Connection';
+        this.accentColor = 'seagreen';
       }
       if (propName === 'type' && this[propName] === 'objective') {
         this.myIcon = 'lightbulb';
         this.mainheader = 'Unit 1';
         this.subheader = 'Learning Objectives';
+        this.accentColor = 'darkorange';
       }
       if (propName === 'type' && this[propName] === 'fact') {
         this.myIcon = 'question';
         this.mainheader = 'Unit 1';
         this.subheader = 'Did you know?';
+        this.accentColor = 'slateblue';
       }
     });
   }
@@ -164,22 +164,18 @@ export class SciCard extends SimpleColors {
       css`
         :host {
           display: block;
-          --learning-objective-primary-color: orange-5;
-        }
-        /* this is how you match something on the tag itself like <learning-card type="math"> and then style the img inside */
-        :host([type='math']) img {
-          background-color: purple;
+          min-width: 400px;
         }
         img {
           display: inline-flex;
-          height: var(--learning-card-height, 100px);
-          width: var(--learning-card-width, 100px);
+          height: var(--learning-card-height, 50px);
+          width: var(--learning-card-width, 50px);
           background-color: green;
         }
         summary {
           list-style-position: inside;
           list-style-image: url('../assets/arrow-right.svg');
-          display: flex;
+          display: block;
         }
         #drawerContents {
           display: flex;
@@ -191,6 +187,19 @@ export class SciCard extends SimpleColors {
           box-shadow: 4px 4px 7px 0px rgba(128, 0, 0, 1);
           margin: 30px 0px;
         }
+        .button {
+          display: inline-block;
+          text-align: center;
+          color: white;
+          background-color: var(--invisi-button-background-color);
+          padding: 0.5rem 2rem;
+          border: 2px solid var(--invisi-button-background-color);
+          border-radius: 5px;
+          font-family: var(--invisi-button-font);
+          text-decoration: none;
+          transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+
         /* summary:hover {
           background-color: var(--simple-colors-default-theme-orange-6);
         } */
@@ -209,7 +218,6 @@ export class SciCard extends SimpleColors {
               data-label="Header"
               data-layout-slotname="header"
             >
-              <!-- <slot name="header"></slot> -->
               <sci-card-banner my-icon="${this.myIcon}" type="${this.type}">
                 <div slot="main-header">
                   <slot name="mainheader">${this.mainheader}</slot>
@@ -225,7 +233,35 @@ export class SciCard extends SimpleColors {
               <li>Test</li>
               <li>Test2</li>
             </ul>
+           
           </div>
+          <div id = "btn">
+          <slot id="button" name="button"></slot><a
+              tabindex="-1"
+              href="${this.link}"
+              target="_blank"
+              rel="noopener noreferrer"
+              role="button"
+              part="invisi-button-link"
+              @click=${this._playSound}
+              ?contenteditable="${this.editMode}"
+            >
+              <invisi-button
+                class="button"
+                type="${this.type}"
+                .disabled="${this.disabled}"
+                style="--invisi-button-background-color: ${this.accentColor};"
+              >
+                ${this.type}
+                <sci-card-icon
+                  class="img"
+                  icon="test"
+                  my-icon="${this.myIcon}"
+                  type="${this.myIcon}"
+                ></sci-card-icon>
+              </invisi-button>
+            </a></slot>
+        </div>
         </details>
       </div>
       <script type="module">
@@ -246,7 +282,7 @@ export class SciCard extends SimpleColors {
       canEditSource: true,
       contentEditable: true,
       gizmo: {
-        title: 'Learning Card',
+        title: 'Sci Card',
         description: 'An element that you have to replace / fix / improve',
         icon: 'credit-card',
         color: 'blue',
@@ -260,8 +296,9 @@ export class SciCard extends SimpleColors {
             description: 'Identifies the card',
             inputMethod: 'select',
             options: {
-              science: 'Science',
-              math: 'Math',
+              science: 'science',
+              objectives: 'objective',
+              fact: 'fact',
             },
           },
         ],
