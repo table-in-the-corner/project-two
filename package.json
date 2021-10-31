@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@lrnwebcomponents/simple-colors": "^4.0.1",
+    "@table-in-the-corner/invisi-button": "0.0.3",
     "lit": "^2.0.0",
     "lit-html": "^2.0.1"
   },

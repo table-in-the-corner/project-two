@@ -1,6 +1,7 @@
 // dependencies / things imported
 import { html, css } from 'lit';
 import { SimpleColors } from '@lrnwebcomponents/simple-colors/simple-colors.js';
+import '@table-in-the-corner/invisi-button';
 
 // this is the base path to the assets calculated at run time
 // this ensures that assets are shipped correctly when building the demo
@@ -64,16 +65,19 @@ export class SciCard extends SimpleColors {
         this.myIcon = 'beaker';
         this.mainheader = 'Unit 1';
         this.subheader = 'Chem Connection';
+        this.accentColor = 'seagreen';
       }
       if (propName === 'type' && this[propName] === 'objective') {
         this.myIcon = 'lightbulb';
         this.mainheader = 'Unit 1';
         this.subheader = 'Learning Objectives';
+        this.accentColor = 'darkorange';
       }
       if (propName === 'type' && this[propName] === 'fact') {
         this.myIcon = 'question';
         this.mainheader = 'Unit 1';
         this.subheader = 'Did you know?';
+        this.accentColor = 'slateblue';
       }
     });
   }
@@ -123,11 +127,12 @@ export class SciCard extends SimpleColors {
       css`
         :host {
           display: block;
+          min-width: 400px;
         }
         img {
           display: inline-flex;
-          height: var(--learning-card-height, 100px);
-          width: var(--learning-card-width, 100px);
+          height: var(--learning-card-height, 50px);
+          width: var(--learning-card-width, 50px);
           background-color: green;
         }
         summary {
@@ -145,6 +150,22 @@ export class SciCard extends SimpleColors {
           box-shadow: 4px 4px 7px 0px rgba(128, 0, 0, 1);
           margin: 30px 0px;
         }
+        .button {
+          display: inline-block;
+          text-align: center;
+          color: white;
+          background-color: var(--invisi-button-background-color);
+          padding: 0.5rem 2rem;
+          border: 2px solid var(--invisi-button-background-color);
+          border-radius: 5px;
+          font-family: var(--invisi-button-font);
+          text-decoration: none;
+          transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+
+        /* summary:hover {
+          background-color: var(--simple-colors-default-theme-orange-6);
+        } */
       `,
     ];
   }
@@ -153,7 +174,7 @@ export class SciCard extends SimpleColors {
   render() {
     return html`
       <div id="cardFrame">
-        <details>
+        <details open>
           <summary part="banner">
             <div
               class="slot-wrapper"
@@ -175,7 +196,35 @@ export class SciCard extends SimpleColors {
               <li>Test</li>
               <li>Test2</li>
             </ul>
+           
           </div>
+          <div id = "btn">
+          <slot id="button" name="button"></slot><a
+              tabindex="-1"
+              href="${this.link}"
+              target="_blank"
+              rel="noopener noreferrer"
+              role="button"
+              part="invisi-button-link"
+              @click=${this._playSound}
+              ?contenteditable="${this.editMode}"
+            >
+              <invisi-button
+                class="button"
+                type="${this.type}"
+                .disabled="${this.disabled}"
+                style="--invisi-button-background-color: ${this.accentColor};"
+              >
+                ${this.type}
+                <sci-card-icon
+                  class="img"
+                  icon="test"
+                  my-icon="${this.myIcon}"
+                  type="${this.myIcon}"
+                ></sci-card-icon>
+              </invisi-button>
+            </a></slot>
+        </div>
         </details>
       </div>
       <script type="module">
