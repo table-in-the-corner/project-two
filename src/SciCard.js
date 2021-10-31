@@ -25,7 +25,7 @@ export class SciCard extends SimpleColors {
     this.type = '';
     this.accentColor = 'blue';
     this.dark = 'false';
-    this.openState = false;
+    this.openState = true;
     this.mainheader = 'This is the main header.';
     this.subheader = 'This is the subheader.';
 
@@ -84,10 +84,6 @@ export class SciCard extends SimpleColors {
         this.subheader = 'Did you know?';
       }
     });
-    if (this.shadowRoot.querySelector('#cardFrame').clientWidth < 320) {
-      this.openState = true;
-      this.shadowRoot.querySelector('details').open();
-    }
   }
 
   // Lit life-cycle; this fires the 1st time the element is rendered on the screen
@@ -129,29 +125,37 @@ export class SciCard extends SimpleColors {
   //   // }
   // }
 
+  /* eslint-disable no-param-reassign */
   stateToggle() {
+    // console.log(this.shadowRoot.querySelector('details'))
+    // https://stackoverflow.com/questions/52365938/get-all-elements-containing-a-class-with-queryselector
     if (
-      this.document
-        .querySelector('div')
+      this.window.document
         .querySelector('card-frame')
         .shadowRoot.querySelector('sci-card').clientWidth < 320
     ) {
-      this.document
-        .querySelector('div')
-        .querySelector('card-frame')
-        .shadowRoot.querySelector('sci-card')
-        .shadowRoot.querySelector('#cardFrame')
-        .querySelector('details').open = true;
-      this.openState = true;
+      this.openState = false;
+      const nodeList = this.window.document.querySelectorAll('card-frame');
+      nodeList.forEach(el => {
+        el.shadowRoot
+          .querySelector('sci-card')
+          .shadowRoot.querySelector('details').open = this.openState;
+      });
+
+      // this.window.document.querySelector('card-frame').shadowRoot.querySelector('sci-card').shadowRoot.querySelector('details').open = this.openState
     } else {
-      this.document
-        .querySelector('div')
-        .querySelector('card-frame')
-        .shadowRoot.querySelector('sci-card')
-        .shadowRoot.querySelector('#cardFrame')
-        .querySelector('details').open = false;
+      this.openState = true;
+      const nodeList2 = this.window.document.querySelectorAll('card-frame');
+      nodeList2.forEach(el => {
+        el.shadowRoot
+          .querySelector('sci-card')
+          .shadowRoot.querySelector('details').open = this.openState;
+      });
+
+      // this.window.document.querySelector('card-frame').shadowRoot.querySelector('sci-card').shadowRoot.querySelector('details').open = true
     }
   }
+  /* eslint-enable no-param-reassign */
 
   // CSS - specific to Lit
   static get styles() {
@@ -197,8 +201,8 @@ export class SciCard extends SimpleColors {
   // HTML - specific to Lit
   render() {
     return html`
-      <div id="cardFrame" onresize="stateToggle()">
-        <details ?open=${this.openState}>
+      <div id="cardFrame">
+        <details .open=${this.openState}>
           <summary part="banner">
             <div
               class="slot-wrapper"
