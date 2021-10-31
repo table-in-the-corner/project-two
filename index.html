@@ -60,13 +60,15 @@
     <li><a href="#">Card demo</a></li>
     <li><a href="/hax.html">HAX, card demo</a></li>
   </ul>
+  <!-- slot the button in here  -->
   <div class="wrapper">
-    <card-frame type="objective"></card-frame>
+    <card-frame type="objective"><slot= button><invisi-button></invisi-button></slot></card-frame>
     <card-frame type="science"></card-frame>
     <card-frame type="fact"></card-frame>
   </div>
   <script type="module">
     import "./src/app.js";
+    import '@table-in-the-corner/invisi-button';
   </script>
 </body>
 

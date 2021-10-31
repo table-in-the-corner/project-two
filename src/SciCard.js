@@ -1,6 +1,7 @@
 // dependencies / things imported
 import { html, css } from 'lit';
 import { SimpleColors } from '@lrnwebcomponents/simple-colors/simple-colors.js';
+import '@table-in-the-corner/invisi-button';
 
 // this is the base path to the assets calculated at run time
 // this ensures that assets are shipped correctly when building the demo
@@ -154,6 +155,19 @@ export class SciCard extends SimpleColors {
           box-shadow: 4px 4px 7px 0px rgba(128, 0, 0, 1);
           margin: 30px 0px;
         }
+        .button {
+        display: inline-block;
+        text-align: center;
+        color: white;
+        background-color: var(--invisi-button-background-color);
+        padding: 0.5rem 2rem;
+        border: 2px solid var(--invisi-button-background-color);
+        border-radius: 5px;
+        font-family: var(--invisi-button-font);
+        text-decoration: none;
+        transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+      }
+        
         /* summary:hover {
           background-color: var(--simple-colors-default-theme-orange-6);
         } */
@@ -189,6 +203,46 @@ export class SciCard extends SimpleColors {
               <li>Test2</li>
             </ul>
           </div>
+
+        <button id="button-id" icon="${this.myIcon}" style="--invisi-button-background-color: ${this.accentColor};">
+          ${this.type}
+          ${this.myIcon}
+                
+        </button>
+        <a
+        tabindex="-1"
+        href="${this.link}"
+        target="_blank"
+        rel="noopener noreferrer"
+        role="button"
+        part="invisi-button-link"
+        @click=${this._playSound}
+        ?contenteditable="${this.editMode}"
+      >
+        <invisi-button class= "button" .disabled="${this.disabled}" icon=${this.myIcon} style="--invisi-button-background-color: ${this.accentColor};">
+          ${this.type}
+          ${this.myIcon}
+          ${!this.disabled
+            ? html`<simple-icon-lite
+                icon="${this.icon}"
+                id="${this.myIcon}"
+              ></simple-icon-lite>`
+            : html``}
+         
+        </invisi-button>
+      </a>
+      <!-- <div slot="button" class="button"><invisi-button .disabled="${this.disabled}" 
+      icon="${this.myIcon}" style="--invisi-button-background-color: ${this.accentColor};">
+      ${this.type}
+      ${this.myIcon}
+          ${!this.disabled
+            ? html`<simple-icon-lite
+                icon="${this.icon}"
+                id="${this.myIcon}"
+              ></simple-icon-lite>`
+            : html``}
+       </invisi-button>
+       </div> -->
         </details>
       </div>
       <script type="module">
