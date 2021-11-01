@@ -18,4 +18,13 @@ describe('LearningCard', () => {
   it('passes the a11y audit', async () => {
     await expect(element).shadowDom.to.be.accessible();
   });
+   it('checks updatedProperties', () => {
+    expect(element.type).to.equal('science');
+    expect(element.icon).to.equal('beaker');
+    element.type = 'objective';
+    expect(element.type).to.equal('objective');
+    expect(element.icon).to.equal('lightbulb');
+    element.type = 'question';
+    expect(element.type).to.equal('fact');
+    expect(element.icon).to.equal('question');
 });
