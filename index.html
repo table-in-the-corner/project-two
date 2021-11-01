@@ -27,16 +27,18 @@
       font-weight: bold;
       padding: 40px;
     }
-    learning-card[type="science"]::part(icon) {
-      width: 200px;
-      height: 200px;
-    }
     @media only screen and (max-width: 480px) {
           sci-card {
             display: flex;
             flex-direction: row;
           }
         }
+
+    @media only screen and (max-width: 420px) {
+      body {
+        padding: 10px;
+      }
+    }
   </style>
   <title>Project two: learning card</title>
 </head>
@@ -51,10 +53,19 @@
     <card-frame type="objective"></card-frame>
     <card-frame type="science"></card-frame>
     <card-frame type="fact"></card-frame>
+    <sci-card-banner></sci-card-banner>
+    <div style="background-color: red; margin-top: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+      <p>Icon</p>
+      <sci-card-icon
+          icon="test"
+          my-icon="beaker"
+          type="beaker"
+        ></sci-card-icon>
+    </div>
   </div>
+  <sci-card type="objective"></sci-card>
   <script type="module">
     import "./src/app.js";
-    import '@table-in-the-corner/invisi-button';
   </script>
 </body>
 
