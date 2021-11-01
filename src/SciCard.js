@@ -1,7 +1,7 @@
 // dependencies / things imported
 import { html, css } from 'lit';
 import { SimpleColors } from '@lrnwebcomponents/simple-colors/simple-colors.js';
-import '@table-in-the-corner/invisi-button';
+import '@table-in-the-corner/invisi-button/invisi-button';
 
 // this is the base path to the assets calculated at run time
 // this ensures that assets are shipped correctly when building the demo
@@ -70,18 +70,41 @@ export class SciCard extends SimpleColors {
         this.mainheader = 'Unit 1';
         this.subheader = 'Chem Connection';
         this.accentColor = 'seagreen';
+        this.myBody = html`
+          <ul>
+            <li>Describe the subatomic particles that make up an atom.</li>
+            <li>
+              Use the periodic table to determine the numbers of protons and
+              electrons in a neutral (uncharged) atom.
+            </li>
+          </ul>
+        `;
       }
       if (propName === 'type' && this[propName] === 'objective') {
         this.myIcon = 'lightbulb';
         this.mainheader = 'Unit 1';
         this.subheader = 'Learning Objectives';
         this.accentColor = 'darkorange';
+        this.myBody = html`
+          <ul>
+            <li>Learning Objective 1</li>
+            <li>Learning Objective 2</li>
+          </ul>
+        `;
       }
       if (propName === 'type' && this[propName] === 'fact') {
         this.myIcon = 'question';
         this.mainheader = 'Unit 1';
         this.subheader = 'Did you know?';
         this.accentColor = 'slateblue';
+        this.myBody = html`
+          <ul>
+            <li>
+              There is about 0.4 pounds or 200g of NaCl in the average adult
+              human body.
+            </li>
+          </ul>
+        `;
       }
     });
   }
@@ -132,7 +155,7 @@ export class SciCard extends SimpleColors {
     if (
       this.window.document
         .querySelector('card-frame')
-        .shadowRoot.querySelector('sci-card').clientWidth < 320
+        .shadowRoot.querySelector('sci-card').clientWidth < 380
     ) {
       this.openState = false;
       const nodeList = this.window.document.querySelectorAll('card-frame');
@@ -164,7 +187,7 @@ export class SciCard extends SimpleColors {
       css`
         :host {
           display: block;
-          min-width: 400px;
+          min-width: 100px;
         }
         img {
           display: inline-flex;
@@ -177,6 +200,9 @@ export class SciCard extends SimpleColors {
           list-style-image: url('../assets/arrow-right.svg');
           display: block;
         }
+        li {
+          font-size: x-large;
+        }
         #drawerContents {
           display: flex;
           flex-direction: column;
@@ -186,6 +212,12 @@ export class SciCard extends SimpleColors {
         #cardFrame {
           box-shadow: 4px 4px 7px 0px rgba(128, 0, 0, 1);
           margin: 30px 0px;
+        }
+        #invisi-button-container {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
         }
         .button {
           display: inline-block;
@@ -228,40 +260,12 @@ export class SciCard extends SimpleColors {
               </sci-card-banner>
             </div>
           </summary>
-          <div id="drawerContents">
-            <ul>
-              <li>Test</li>
-              <li>Test2</li>
-            </ul>
-           
+          <div id="drawerContents">${this.myBody}</div>
+          <div id="invisi-button-container" slot="invisi-button">
+            <invisi-button
+              style="--invisi-button-background-color: ${this.accentColor}"
+            ></invisi-button>
           </div>
-          <div id = "btn">
-          <slot id="button" name="button"></slot><a
-              tabindex="-1"
-              href="${this.link}"
-              target="_blank"
-              rel="noopener noreferrer"
-              role="button"
-              part="invisi-button-link"
-              @click=${this._playSound}
-              ?contenteditable="${this.editMode}"
-            >
-              <invisi-button
-                class="button"
-                type="${this.type}"
-                .disabled="${this.disabled}"
-                style="--invisi-button-background-color: ${this.accentColor};"
-              >
-                ${this.type}
-                <sci-card-icon
-                  class="img"
-                  icon="test"
-                  my-icon="${this.myIcon}"
-                  type="${this.myIcon}"
-                ></sci-card-icon>
-              </invisi-button>
-            </a></slot>
-        </div>
         </details>
       </div>
       <script type="module">

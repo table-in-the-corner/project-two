@@ -22,7 +22,7 @@ export class CardFrame extends LitElement {
       <div>
         <sci-card type="${this.type}">
           <div slot="header"></div>
-          <div slot="button"></div>
+          <div slot="invisi-button"></div>
         </sci-card>
       </div>
     `;

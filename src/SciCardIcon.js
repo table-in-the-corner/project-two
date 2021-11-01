@@ -99,6 +99,13 @@ export class SciCardIcon extends SimpleColors {
           width: var(--sci-card-width, 150px);
           background-color: transparent;
         }
+
+        @media screen and (max-width: 600px) {
+          img {
+            height: var(--sci-card-height, 100px);
+            width: var(--sci-card-width, 100px);
+          }
+        }
       `,
     ];
   }
