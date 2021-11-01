@@ -18,7 +18,14 @@ describe('LearningCard', () => {
   it('passes the a11y audit', async () => {
     await expect(element).shadowDom.to.be.accessible();
   });
-   it('checks updatedProperties', () => {
+
+});
+describe('SciCardIcon', () => {
+  let element;
+  beforeEach(async () => {
+    element = await fixture(html`<sci-card-icon></sci-card-icon>`);
+  });
+  it('checks updatedProperties', () => {
     expect(element.type).to.equal('science');
     expect(element.icon).to.equal('beaker');
     element.type = 'objective';
@@ -27,4 +34,24 @@ describe('LearningCard', () => {
     element.type = 'question';
     expect(element.type).to.equal('fact');
     expect(element.icon).to.equal('question');
+  });
+
+});
+describe('SciCardBanner', () => {
+  let element;
+  beforeEach(async () => {
+    element = await fixture(html`<sci-card-banner></sci-card-banner>`);
+  });
+});
+describe('SciCard', () => {
+  let element;
+  beforeEach(async () => {
+    element = await fixture(html`<sci-card></sci-card>`);
+  });
+});
+describe('CardFrame', () => {
+  let element;
+  beforeEach(async () => {
+    element = await fixture(html`<card-frame></card-frame>`);
+  });
 });
