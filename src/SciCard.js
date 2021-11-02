@@ -28,6 +28,7 @@ export class SciCard extends SimpleColors {
     this.mainheader = 'Unit 1';
     this.subheader = 'Learning Objectives';
     this.openState = true;
+    this.accentColor = 'slateblue';
 
     if (this.getAttribute('icon') != null) {
       const sketchTag = document.createElement('sci-card-icon');
