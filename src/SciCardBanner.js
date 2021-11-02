@@ -1,8 +1,10 @@
 import { html, css } from 'lit';
 import { SimpleColors } from '@lrnwebcomponents/simple-colors/simple-colors.js';
+import { IntersectionObserverMixin } from '@lrnwebcomponents/intersection-element/lib/IntersectionObserverMixin.js';
+
 import './SciCardIcon.js';
 
-export class SciCardBanner extends SimpleColors {
+export class SciCardBanner extends IntersectionObserverMixin(SimpleColors) {
   static get tag() {
     return 'sci-card-banner';
   }
@@ -10,23 +12,43 @@ export class SciCardBanner extends SimpleColors {
   // updated fires every time a property defined above changes
   // this allows you to react to variables changing and use javascript to perform logic
   updated(changedProperties) {
+    // changedProperties.forEach((oldValue, propName) => {
+    //   if (propName === "elementVisible" && this[propName]){
+    //     import('./SciCardIcon.js');
+    //   }
+    //   if(
+    //     ["elementVisible", "myIcon", "type"].includes(
+    //       propName
+    //     ) && this.type && this.myIcon && this.elementVisible
+    //   ){
+    //     clearTimeout(this._debounce);
+    //     this._debounce = setTimeout(() => {
+    //       this.updateIcon(this.type, this.myIcon);
+    //     }, 25);
+    //   }
+    // });
+
+    super.update(changedProperties);
     changedProperties.forEach((oldValue, propName) => {
-      if (propName === 'type' && this[propName] === 'science') {
-        this.myIcon = 'beaker';
-        this.accentColor = '#008c37';
-      }
-      if (propName === 'type' && this[propName] === 'objective') {
-        this.myIcon = 'lightbulb';
-        this.accentColor = '#ff9625';
-      }
-      if (propName === 'type' && this[propName] === 'fact') {
-        this.myIcon = 'question';
-        this.accentColor = '#0066ca';
-      }
-      // used for storybook when a type above isn't selected
-      if (propName === 'type' && this[propName] === '') {
-        this.myIcon = 'lightbulb';
-        this.accentColor = '#835fff';
+      if (propName === 'elementVisible' && this[propName]) {
+        import('./SciCardIcon.js');
+        // if (propName === 'type' && this[propName] === 'science') {
+        //   this.myIcon = 'beaker';
+        //   this.accentColor = '#008c37';
+        // }
+        // if (propName === 'type' && this[propName] === 'objective') {
+        //   this.myIcon = 'lightbulb';
+        //   this.accentColor = '#ff9625';
+        // }
+        // if (propName === 'type' && this[propName] === 'fact') {
+        //   this.myIcon = 'question';
+        //   this.accentColor = '#0066ca';
+        // }
+        // // used for storybook when a type above isn't selected
+        // if (propName === 'type' && this[propName] === '') {
+        //   this.myIcon = 'lightbulb';
+        //   this.accentColor = '#835fff';
+        // }
       }
     });
   }
@@ -51,31 +73,20 @@ export class SciCardBanner extends SimpleColors {
     super.disconnectedCallback();
   }
 
-  _rotateIcon() {
-    // console.log(this);
-    if (!this.shadowRoot.querySelector('details').open) {
-      this.shadowRoot.querySelector('summary').style.listStyleImage =
-        "url('../assets/arrow-down.svg')";
-    } else {
-      this.shadowRoot.querySelector('summary').style.listStyleImage =
-        "url('../assets/arrow-right.svg')";
-    }
-  }
-
   constructor() {
     super();
     this.type = '';
     this.myIcon = 'lightbulb';
     this.accentColor = 'blue';
 
-    if (this.getAttribute('icon') != null) {
-      const sketchTag = document.createElement('sci-card-icon');
-      sketchTag.innerHTML = this.getAttribute('icon');
-      this.appendChild(sketchTag);
-      setTimeout(() => {
-        import('./SciCardIcon.js');
-      }, 0);
-    }
+    // if (this.getAttribute('my-icon') != null) {
+    //   const sketchTag = document.createElement('sci-card-icon');
+    //   sketchTag.innerHTML = this.getAttribute('my-icon');
+    //   this.appendChild(sketchTag);
+    //   setTimeout(() => {
+    //     import('./SciCardIcon.js');
+    //   }, 0);
+    // }
   }
 
   static get properties() {
@@ -180,11 +191,13 @@ export class SciCardBanner extends SimpleColors {
         id="bannerElement"
         style="--sci-card-banner-color: ${this.accentColor}"
       >
-        <sci-card-icon
-          icon="test"
-          my-icon="${this.myIcon}"
-          type="${this.myIcon}"
-        ></sci-card-icon>
+        ${this.elementVisible
+          ? html`<sci-card-icon
+              icon="${this.myIcon}"
+              my-icon="${this.myIcon}"
+              type="${this.myIcon}"
+            ></sci-card-icon>`
+          : ``}
         <div id="banner">
           <div id="headers">
             <slot id="main-header" name="main-header"></slot>

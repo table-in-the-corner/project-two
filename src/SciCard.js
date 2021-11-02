@@ -246,7 +246,6 @@ export class SciCard extends SimpleColors {
         #drawerContents {
           font-size: 1em;
         }
-
         @media screen and (min-width: 920px) {
           #drawerContents {
             font-size: 2em;
