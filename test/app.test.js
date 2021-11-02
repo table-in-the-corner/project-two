@@ -2,6 +2,10 @@ import { html } from 'lit';
 import { fixture, expect } from '@open-wc/testing';
 
 import '../src/app.js';
+import '../src/SciCardBanner.js';
+import '../src/SciCard.js';
+import '../src/CardFrame.js';
+import '../src/SciCardIcon.js';
 
 describe('LearningCard', () => {
   let element;
