@@ -207,10 +207,9 @@ export class SciCard extends SimpleColors {
           list-style-image: url('../assets/arrow-right.svg');
           display: block;
         }
-        li {
-          font-size: x-large;
-        }
+       
         #drawerContents {
+          font-size: 150%;
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -238,11 +237,20 @@ export class SciCard extends SimpleColors {
           text-decoration: none;
           transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
         }
+        @media screen and (max-width: 560px) {
+          #drawerContents {
+            font-size: .75em;
+          }
 
-        /* }
-        /* summary:hover {
-          background-color: var(--simple-colors-default-theme-orange-6);
-        } */
+        @media screen and (min-width: 560px) {
+        #drawerContents {
+          font-size: 1em;
+        }
+
+        @media screen and (min-width: 920px) {
+          #drawerContents {
+            font-size: 2em;
+          }
       `,
     ];
   }
