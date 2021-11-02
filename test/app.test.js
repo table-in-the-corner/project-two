@@ -19,7 +19,9 @@ describe('LearningCard', () => {
     await expect(element).shadowDom.to.be.accessible();
   });
 
+
 });
+
 describe('SciCardIcon', () => {
   let element;
   beforeEach(async () => {
@@ -35,14 +37,15 @@ describe('SciCardIcon', () => {
   element.type = 'question';
   expect(element.type).to.equal('fact');
   expect(element.icon).to.equal('question');
-  });
-
+});
 });
 describe('SciCardBanner', () => {
   let element;
   beforeEach(async () => {
     element = await fixture(html`<sci-card-banner></sci-card-banner>`);
   });
+ 
+  
 });
 describe('SciCard', () => {
   let element;
