@@ -232,6 +232,12 @@ export class SciCard extends SimpleColors {
           transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
         }
 
+        @media screen and (max-width: 560px) {
+          li {
+            font-size: small;
+          }
+        }
+
         /* summary:hover {
           background-color: var(--simple-colors-default-theme-orange-6);
         } */
