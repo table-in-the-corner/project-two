@@ -10,18 +10,32 @@ export class SciCardIcon extends SimpleColors {
     return 'sci-card-icon';
   }
 
+  constructor() {
+    super();
+    this.myIcon = null;
+  }
+
+  static get properties() {
+    return {
+      ...super.properties,
+      type: { type: String, reflect: true },
+      icon: { type: String, reflect: true },
+      myIcon: { type: String, attribute: 'my-icon' },
+    };
+  }
+
   // updated fires every time a property defined above changes
   // this allows you to react to variables changing and use javascript to perform logic
   updated(changedProperties) {
     changedProperties.forEach((oldValue, propName) => {
-      if (propName === 'type' && this[propName] === 'science') {
-        this.myIcon = 'beaker';
+      if (propName === 'icon' && this[propName] === 'beaker') {
+        this.myIcon = beaker;
       }
-      if (propName === 'type' && this[propName] === 'objective') {
+      if (propName === 'icon' && this[propName] === 'lightbulb') {
         this.myIcon = lightbulb;
       }
-      if (propName === 'type' && this[propName] === 'fact') {
-        this.myIcon = 'question';
+      if (propName === 'icon' && this[propName] === 'question') {
+        this.myIcon = question;
       }
       // if (propName === 'type' && this[propName] === 'beaker') {
       //   this.myIcon = 'beaker';
@@ -73,19 +87,6 @@ export class SciCardIcon extends SimpleColors {
     // }
   }
 
-  constructor() {
-    super();
-    this.myIcon = null;
-  }
-
-  static get properties() {
-    return {
-      ...super.properties,
-      type: { type: String, reflect: true },
-      myIcon: { type: String, attribute: 'my-icon' },
-    };
-  }
-
   static get styles() {
     return [
       ...super.styles,
@@ -112,27 +113,32 @@ export class SciCardIcon extends SimpleColors {
 
   render() {
     // return html`<div>This is my ${this.title} and this is ${this.header}<slot></slot></div>`;
-    if (this.myIcon === 'lightbulb') {
-      return html`
-        <div id="bannerElement">
-          <img part="icon" src="${lightbulb}" alt="" />
-        </div>
-      `;
-    }
-    if (this.myIcon === 'beaker') {
-      return html`
-        <div id="bannerElement">
-          <img part="icon" src="${beaker}" alt="" />
-        </div>
-      `;
-    }
-    if (this.myIcon === 'question') {
-      return html`
-        <div id="bannerElement">
-          <img part="icon" src="${question}" alt="" />
-        </div>
-      `;
-    }
-    return null;
+    return html`
+      <div id="bannerElement">
+        <img part="icon" src="${this.myIcon}" alt="" />
+      </div>
+    `;
+    // if (this.myIcon === 'lightbulb') {
+    //   return html`
+    //     <div id="bannerElement">
+    //       <img part="icon" src="${lightbulb}" alt="" />
+    //     </div>
+    //   `;
+    // }
+    // if (this.myIcon === 'beaker') {
+    //   return html`
+    //     <div id="bannerElement">
+    //       <img part="icon" src="${beaker}" alt="" />
+    //     </div>
+    //   `;
+    // }
+    // if (this.myIcon === 'question') {
+    //   return html`
+    //     <div id="bannerElement">
+    //       <img part="icon" src="${question}" alt="" />
+    //     </div>
+    //   `;
+    // }
+    // return null;
   }
 }

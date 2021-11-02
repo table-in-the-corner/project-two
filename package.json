@@ -21,6 +21,7 @@
     "start": "web-dev-server"
   },
   "dependencies": {
+    "@lrnwebcomponents/intersection-element": "^4.0.0",
     "@lrnwebcomponents/simple-colors": "^4.0.1",
     "@table-in-the-corner/invisi-button": "0.0.3",
     "lit": "^2.0.0",

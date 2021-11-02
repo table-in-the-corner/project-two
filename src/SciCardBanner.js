@@ -1,35 +1,33 @@
 import { html, css } from 'lit';
 import { SimpleColors } from '@lrnwebcomponents/simple-colors/simple-colors.js';
+import { IntersectionObserverMixin } from '@lrnwebcomponents/intersection-element/lib/IntersectionObserverMixin.js';
+
 import './SciCardIcon.js';
 
-export class SciCardBanner extends SimpleColors {
+export class SciCardBanner extends IntersectionObserverMixin(SimpleColors) {
   static get tag() {
     return 'sci-card-banner';
   }
 
   // updated fires every time a property defined above changes
   // this allows you to react to variables changing and use javascript to perform logic
-  updated(changedProperties) {
-    changedProperties.forEach((oldValue, propName) => {
-      if (propName === 'type' && this[propName] === 'science') {
-        this.myIcon = 'beaker';
-        this.accentColor = 'seagreen';
-      }
-      if (propName === 'type' && this[propName] === 'objective') {
-        this.myIcon = 'lightbulb';
-        this.accentColor = 'darkorange';
-      }
-      if (propName === 'type' && this[propName] === 'fact') {
-        this.myIcon = 'question';
-        this.accentColor = 'slateblue';
-      }
-      // used for storybook when a type above isn't selected
-      if (propName === 'type' && this[propName] === '') {
-        this.myIcon = 'lightbulb';
-        this.accentColor = 'purple';
-      }
-    });
-  }
+  // updated(changedProperties) {
+  //   changedProperties.forEach((oldValue, propName) => {
+  //     if (propName === "elementVisible" && this[propName]){
+  //       import('./SciCardIcon.js');
+  //     }
+  //     if(
+  //       ["elementVisible", "myIcon", "type"].includes(
+  //         propName
+  //       ) && this.type && this.myIcon && this.elementVisible
+  //     ){
+  //       clearTimeout(this._debounce);
+  //       this._debounce = setTimeout(() => {
+  //         this.updateIcon(this.type, this.myIcon);
+  //       }, 25);
+  //     }
+  //   });
+  // }
 
   // Lit life-cycle; this fires the 1st time the element is rendered on the screen
   // this is a sign it is safe to make calls to this.shadowRoot
@@ -51,6 +49,29 @@ export class SciCardBanner extends SimpleColors {
     super.disconnectedCallback();
   }
 
+  // updateIcon(changedProperties){
+  //   changedProperties.forEach((propName) => {
+  //     if (propName === 'type' && this[propName] === 'science') {
+  //       this.myIcon = 'beaker';
+  //       this.accentColor = 'seagreen';
+  //     }
+  //     if (propName === 'type' && this[propName] === 'objective') {
+  //       this.myIcon = 'lightbulb';
+  //       this.accentColor = 'darkorange';
+  //     }
+  //     if (propName === 'type' && this[propName] === 'fact') {
+  //       this.myIcon = 'question';
+  //       this.accentColor = 'slateblue';
+  //     }
+  //     // used for storybook when a type above isn't selected
+  //     if (propName === 'type' && this[propName] === '') {
+  //       this.myIcon = 'lightbulb';
+  //       this.accentColor = 'purple';
+  //     }
+  //   });
+
+  // }
+
   _rotateIcon() {
     // console.log(this);
     if (!this.shadowRoot.querySelector('details').open) {
@@ -68,9 +89,9 @@ export class SciCardBanner extends SimpleColors {
     this.myIcon = 'lightbulb';
     this.accentColor = 'blue';
 
-    if (this.getAttribute('icon') != null) {
+    if (this.getAttribute('my-icon') != null) {
       const sketchTag = document.createElement('sci-card-icon');
-      sketchTag.innerHTML = this.getAttribute('icon');
+      sketchTag.innerHTML = this.getAttribute('my-icon');
       this.appendChild(sketchTag);
       setTimeout(() => {
         import('./SciCardIcon.js');
@@ -175,23 +196,25 @@ export class SciCardBanner extends SimpleColors {
   }
 
   render() {
-    return html`
-      <div
-        id="bannerElement"
-        style="--sci-card-banner-color: ${this.accentColor}"
-      >
-        <sci-card-icon
-          icon="test"
-          my-icon="${this.myIcon}"
-          type="${this.myIcon}"
-        ></sci-card-icon>
-        <div id="banner">
-          <div id="headers">
-            <slot id="main-header" name="main-header"></slot>
-            <slot id="sub-header" name="sub-header"></slot>
+    return html` ${this.elementVisible
+      ? html`
+          <div
+            id="bannerElement"
+            style="--sci-card-banner-color: ${this.accentColor}"
+          >
+            <sci-card-icon
+              icon="${this.myIcon}"
+              my-icon="${this.myIcon}"
+              type="${this.myIcon}"
+            ></sci-card-icon>
+            <div id="banner">
+              <div id="headers">
+                <slot id="main-header" name="main-header"></slot>
+                <slot id="sub-header" name="sub-header"></slot>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    `;
+        `
+      : ``}`;
   }
 }
