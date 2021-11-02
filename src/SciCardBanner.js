@@ -34,20 +34,20 @@ export class SciCardBanner extends IntersectionObserverMixin(SimpleColors) {
         import('./SciCardIcon.js');
         // if (propName === 'type' && this[propName] === 'science') {
         //   this.myIcon = 'beaker';
-        //   this.accentColor = 'seagreen';
+        //   this.accentColor = '#008c37';
         // }
         // if (propName === 'type' && this[propName] === 'objective') {
         //   this.myIcon = 'lightbulb';
-        //   this.accentColor = 'darkorange';
+        //   this.accentColor = '#ff9625';
         // }
         // if (propName === 'type' && this[propName] === 'fact') {
         //   this.myIcon = 'question';
-        //   this.accentColor = 'slateblue';
+        //   this.accentColor = '#0066ca';
         // }
         // // used for storybook when a type above isn't selected
         // if (propName === 'type' && this[propName] === '') {
         //   this.myIcon = 'lightbulb';
-        //   this.accentColor = 'purple';
+        //   this.accentColor = '#835fff';
         // }
       }
     });
