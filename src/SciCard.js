@@ -19,6 +19,12 @@ export class SciCard extends SimpleColors {
     return 'sci-card';
   }
 
+  // @media only screen and (min-width: 600px){
+  //   h2{
+
+  //   }
+  // }
+
   // HTMLElement life-cycle, built in; use this for setting defaults
   constructor() {
     super();
@@ -28,7 +34,7 @@ export class SciCard extends SimpleColors {
     this.mainheader = 'Unit 1';
     this.subheader = 'Learning Objectives';
     this.openState = true;
-    this.accentColor = 'slateblue';
+    this.accentColor = '#835FFF';
 
     if (this.getAttribute('icon') != null) {
       const sketchTag = document.createElement('sci-card-icon');
@@ -70,7 +76,7 @@ export class SciCard extends SimpleColors {
         this.myIcon = 'beaker';
         this.mainheader = 'Unit 1';
         this.subheader = 'Chem Connection';
-        this.accentColor = 'seagreen';
+        this.accentColor = '#008C37';
         this.myBody = html`
           <ul>
             <li>Describe the subatomic particles that make up an atom.</li>
@@ -85,7 +91,7 @@ export class SciCard extends SimpleColors {
         this.myIcon = 'lightbulb';
         this.mainheader = 'Unit 1';
         this.subheader = 'Learning Objectives';
-        this.accentColor = 'darkorange';
+        this.accentColor = '#FF9625';
         this.myBody = html`
           <ul>
             <li>Learning Objective 1</li>
@@ -97,7 +103,7 @@ export class SciCard extends SimpleColors {
         this.myIcon = 'question';
         this.mainheader = 'Unit 1';
         this.subheader = 'Did you know?';
-        this.accentColor = 'slateblue';
+        this.accentColor = '#0066CA';
         this.myBody = html`
           <ul>
             <li>
@@ -201,10 +207,9 @@ export class SciCard extends SimpleColors {
           list-style-image: url('../assets/arrow-right.svg');
           display: block;
         }
-        li {
-          font-size: x-large;
-        }
+       
         #drawerContents {
+          font-size: 150%;
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -232,10 +237,20 @@ export class SciCard extends SimpleColors {
           text-decoration: none;
           transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
         }
+        @media screen and (max-width: 560px) {
+          #drawerContents {
+            font-size: .75em;
+          }
 
-        /* summary:hover {
-          background-color: var(--simple-colors-default-theme-orange-6);
-        } */
+        @media screen and (min-width: 560px) {
+        #drawerContents {
+          font-size: 1em;
+        }
+
+        @media screen and (min-width: 920px) {
+          #drawerContents {
+            font-size: 2em;
+          }
       `,
     ];
   }
@@ -265,6 +280,8 @@ export class SciCard extends SimpleColors {
           <div id="invisi-button-container" slot="invisi-button">
             <invisi-button
               style="--invisi-button-background-color: ${this.accentColor}"
+              title="Details"
+              link="https://science.psu.edu/"
             ></invisi-button>
           </div>
         </details>
