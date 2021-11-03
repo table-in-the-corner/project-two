@@ -2,10 +2,10 @@ import { html } from 'lit';
 import { fixture, expect } from '@open-wc/testing';
 
 import '../src/app.js';
-//import '../src/SciCardBanner.js';
-//import '../src/SciCard.js';
-//import '../src/CardFrame.js';
-//import '../src/SciCardIcon.js';
+import '../src/SciCardBanner.js';
+import '../src/SciCard.js';
+import '../src/CardFrame.js';
+import '../src/SciCardIcon.js';
 
 describe('LearningCard', () => {
   let element;
@@ -21,6 +21,10 @@ describe('LearningCard', () => {
 
   it('passes the a11y audit', async () => {
     await expect(element).shadowDom.to.be.accessible();
+  });
+  it('renders the banner element', () => {
+    const banner = document.querySelector('Sci-Card-Banner');
+    expect(banner).to.exist;
   });
 
 
@@ -56,10 +60,29 @@ describe('SciCard', () => {
   beforeEach(async () => {
     element = await fixture(html`<sci-card></sci-card>`);
   });
+  it('renders a subheader', () => {
+    slot = element.shadowRoot.querySelector('sub-header');
+    expect().to.exist;
+    expect(sub-header).to.equal('Learning Objectives');
+  });
 });
 describe('CardFrame', () => {
   let element;
   beforeEach(async () => {
     element = await fixture(html`<card-frame></card-frame>`);
+  });
+  it('passes the a11y audit', async () => {
+    element.type = 'science';
+    setTimeout(() => {
+      expect(element).shadowDom.to.be.accessible();
+    }, 100);
+    element.type = 'objective';
+    setTimeout(() => {
+      expect(element).shadowDom.to.be.accessible();
+    }, 100);
+    element.type = 'fact';
+    setTimeout(() => {
+      expect(element).shadowDom.to.be.accessible();
+    }, 100);
   });
 });
