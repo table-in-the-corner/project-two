@@ -78,15 +78,6 @@ export class SciCardBanner extends IntersectionObserverMixin(SimpleColors) {
     this.type = '';
     this.myIcon = 'lightbulb';
     this.accentColor = 'blue';
-
-    // if (this.getAttribute('my-icon') != null) {
-    //   const sketchTag = document.createElement('sci-card-icon');
-    //   sketchTag.innerHTML = this.getAttribute('my-icon');
-    //   this.appendChild(sketchTag);
-    //   setTimeout(() => {
-    //     import('./SciCardIcon.js');
-    //   }, 0);
-    // }
   }
 
   static get properties() {

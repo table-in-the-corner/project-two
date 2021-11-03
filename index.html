@@ -48,11 +48,48 @@
     <li><a href="#">Card demo</a></li>
     <li><a href="/hax.html">HAX, card demo</a></li>
   </ul>
-  <!-- slot the button in here  -->
   <div class="">
-    <card-frame type="objective"></card-frame>
-    <card-frame type="science"></card-frame>
-    <card-frame type="fact"></card-frame>
+    <card-frame type="objective" mainheader="Unit 1" subheader="Learning Objectives" cardBody="">
+      <div slot="header">
+        Unit 1
+      </div>
+      <div slot="subheader">
+        Learning Objectives
+      </div>
+      <ul slot="body-content">
+        <li>Learning Objective 1</li>
+        <li>Learning Objective 2</li>
+      </ul>
+    </card-frame>
+    <card-frame type="science">
+      <div slot="header">
+        Unit 1
+      </div>
+      <div slot="subheader">
+        Chem Connection
+      </div>
+      <ul slot="body-content">
+        <li>Describe the subatomic particles that make up an atom.</li>
+        <li>
+          Use the periodic table to determine the numbers of protons and
+          electrons in a neutral (uncharged) atom.
+        </li>
+      </ul>
+    </card-frame>
+    <card-frame type="fact">
+      <div slot="header">
+        Unit 1
+      </div>
+      <div slot="subheader">
+        Did you know?
+      </div>
+      <ul slot="body-content">
+        <li>
+          There is about 0.4 pounds or 200g of NaCl in the average adult
+          human body.
+        </li>
+      </ul>
+    </card-frame>
     <sci-card-banner></sci-card-banner>
     <div style="background-color: red; margin-top: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
       <p>Icon</p>
