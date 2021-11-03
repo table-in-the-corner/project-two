@@ -37,15 +37,6 @@ export class SciCardIcon extends SimpleColors {
       if (propName === 'icon' && this[propName] === 'question') {
         this.myIcon = question;
       }
-      // if (propName === 'type' && this[propName] === 'beaker') {
-      //   this.myIcon = 'beaker';
-      // }
-      // if (propName === 'type' && this[propName] === 'lightbulb') {
-      //   this.myIcon = 'lightbulb';
-      // }
-      // if (propName === 'type' && this[propName] === 'question') {
-      //   this.myIcon = 'question';
-      // }
     });
   }
 
@@ -67,24 +58,6 @@ export class SciCardIcon extends SimpleColors {
   // this fires every time the element moves
   disconnectedCallback() {
     super.disconnectedCallback();
-  }
-
-  _rotateIcon() {
-    // console.log(this);
-    if (!this.shadowRoot.querySelector('details').open) {
-      this.shadowRoot.querySelector('summary').style.listStyleImage =
-        "url('../assets/arrow-down.svg')";
-    } else {
-      this.shadowRoot.querySelector('summary').style.listStyleImage =
-        "url('../assets/arrow-right.svg')";
-    }
-
-    // if (this.open) {
-    //   document.querySelector('summary::marker').style.transform = 'rotate(-90deg)';
-    // } else {
-    //   console.log("hi");
-    //   // document.querySelector('summary::marker').style.transform = 'rotate(90deg)';
-    // }
   }
 
   static get styles() {
@@ -118,27 +91,5 @@ export class SciCardIcon extends SimpleColors {
         <img part="icon" src="${this.myIcon}" alt="" />
       </div>
     `;
-    // if (this.myIcon === 'lightbulb') {
-    //   return html`
-    //     <div id="bannerElement">
-    //       <img part="icon" src="${lightbulb}" alt="" />
-    //     </div>
-    //   `;
-    // }
-    // if (this.myIcon === 'beaker') {
-    //   return html`
-    //     <div id="bannerElement">
-    //       <img part="icon" src="${beaker}" alt="" />
-    //     </div>
-    //   `;
-    // }
-    // if (this.myIcon === 'question') {
-    //   return html`
-    //     <div id="bannerElement">
-    //       <img part="icon" src="${question}" alt="" />
-    //     </div>
-    //   `;
-    // }
-    // return null;
   }
 }
