@@ -7,69 +7,54 @@ import '../src/SciCard.js';
 import '../src/CardFrame.js';
 import '../src/SciCardIcon.js';
 
-describe('LearningCard', () => {
-  let element;
-  beforeEach(async () => {
-    element = await fixture(html`<learning-card></learning-card>`);
-  });
-
-  it('renders a h1', () => {
-    const h1 = element.shadowRoot.querySelector('h1');
-    expect(h1).to.exist;
-    expect(h1.textContent).to.equal('cool');
-  });
-
-  it('passes the a11y audit', async () => {
-    await expect(element).shadowDom.to.be.accessible();
-  });
-  it('renders the banner element', () => {
-    const banner = document.querySelector('Sci-Card-Banner');
-    expect(banner).to.exist;
-  });
-
-
-});
-
 describe('SciCardIcon', () => {
   let element;
   beforeEach(async () => {
-    element = await fixture(html`<sci-card-icon></sci-card-icon>`);
+    element = await fixture(
+      html`<sci-card-icon icon="beaker" type="beaker"></sci-card-icon>`
+    );
   });
- // it('checks updatedProperties', () => {
-   // element.type='science';
- //   expect(element.type).to.equal('science');
- //   expect(element.icon).to.equal('beaker');
-//   element.type = 'objective';
-//   expect(element.type).to.equal('objective');
-//  expect(element.icon).to.equal('lightbulb');
-//  element.type = 'question';
-//  expect(element.type).to.equal('fact');
-//  expect(element.icon).to.equal('question');
-//});
+
+  it('Check beaker image link is correct', () => {
+    expect(element.shadowRoot.querySelector('img').src).to.equal(
+      'http://localhost:8000/assets/beaker.svg'
+    );
+  });
 });
 describe('SciCardBanner', () => {
   let element;
   beforeEach(async () => {
-    element = await fixture(html`<sci-card-banner></sci-card-banner>`);
+    element = await fixture(
+      html`<sci-card-banner type="fact"></sci-card-banner>`
+    );
   });
- 
-  
+
+  it('Has a blue background', () => {
+    expect(
+      element.shadowRoot.querySelector('#bannerElement').style.cssText
+    ).to.equal('--sci-card-banner-color: blue;');
+  });
 });
 describe('SciCard', () => {
   let element;
   beforeEach(async () => {
-    element = await fixture(html`<sci-card></sci-card>`);
+    element = await fixture(html`<sci-card type="fact"></sci-card>`);
   });
-  it('renders a subheader', () => {
-    slot = element.shadowRoot.querySelector('sub-header');
-    expect().to.exist;
-    expect(sub-header).to.equal('Learning Objectives');
+
+  it('renders a Header, Subheader', () => {
+    expect(element.mainheader).to.equal('Unit 1');
+    expect(element.subheader).to.exist;
+    expect(element.subheader).to.equal('Did you know?');
+    expect(
+      element.shadowRoot.querySelector('#cardFrame').querySelector('details')
+    ).to.exist;
   });
 });
+
 describe('CardFrame', () => {
   let element;
   beforeEach(async () => {
-    element = await fixture(html`<card-frame></card-frame>`);
+    element = await fixture(html`<card-frame type="science"></card-frame>`);
   });
   it('passes the a11y audit', async () => {
     element.type = 'science';
@@ -84,5 +69,17 @@ describe('CardFrame', () => {
     setTimeout(() => {
       expect(element).shadowDom.to.be.accessible();
     }, 100);
+  });
+
+  it('Contains appropriate body list slots', async () => {
+    expect(element.shadowRoot.querySelectorAll('div slot')[0].name).to.equal(
+      'header'
+    );
+    expect(element.shadowRoot.querySelectorAll('div slot')[1].name).to.equal(
+      'subheader'
+    );
+    expect(element.shadowRoot.querySelectorAll('div slot')[2].name).to.equal(
+      'body-content'
+    );
   });
 });
