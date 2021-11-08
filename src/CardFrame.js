@@ -13,7 +13,7 @@ export class CardFrame extends LitElement {
 
   static get properties() {
     return {
-      type: { type: String, reflect: true },
+      type: { type: String },
     };
   }
 
@@ -36,3 +36,5 @@ export class CardFrame extends LitElement {
     `;
   }
 }
+customElements.define(CardFrame.tag, CardFrame);
+

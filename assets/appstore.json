@@ -841,7 +841,7 @@
         "meme-maker": "@lrnwebcomponents/meme-maker/meme-maker.js",
         "wikipedia-query": "@lrnwebcomponents/wikipedia-query/wikipedia-query.js",
         "grid-plate": "@lrnwebcomponents/grid-plate/grid-plate.js",
-        "learning-card": "../src/app.js"
+        "sci-card": "../src/app.js"
     }
   }
   
