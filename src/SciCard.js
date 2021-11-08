@@ -22,66 +22,52 @@ export class SciCard extends SimpleColors {
   // HTMLElement life-cycle, built in; use this for setting defaults
   constructor() {
     super();
-    this.myIcon = null;
-    this.type = '';
+    this.type = 'fact';
     this.dark = false;
     this.mainheader = 'Unit 1';
     this.subheader = 'Learning Objectives';
     this.openState = true;
-    this.accentColor = '#835FFF';
-
-    if (this.getAttribute('icon') != null) {
-      const sketchTag = document.createElement('sci-card-icon');
-      sketchTag.innerHTML = this.getAttribute('icon');
-      this.appendChild(sketchTag);
-      setTimeout(() => {
-        import('./SciCardIcon.js');
-      }, 0);
-    }
+    this.accentColor = 'blue';
+    this.link = "https://psu.edu";
+    this.label = "More details";
   }
 
   // properties that you wish to use as data in HTML, CSS, and the updated life-cycle
   static get properties() {
     return {
+      ...super.properties,
       type: { type: String, reflect: true },
-      myIcon: { type: String, attribute: 'my-icon' },
       mainheader: { type: String, reflect: true },
       subheader: { type: String, reflect: true },
       openState: { type: Boolean },
+      link: { type: String },
+      label: { type: String },
     };
   }
 
   // updated fires every time a property defined above changes
   // this allows you to react to variables changing and use javascript to perform logic
   updated(changedProperties) {
+    if (super.updated) {
+      super.updated(changedProperties);
+    }
     changedProperties.forEach((oldValue, propName) => {
       if (propName === 'type' && this[propName] === 'science') {
-        this.myIcon = 'beaker';
         this.mainheader = 'Unit 1';
         this.subheader = 'Chem Connection';
-        this.accentColor = '#008C37';
+        this.accentColor = "green";
       }
       if (propName === 'type' && this[propName] === 'objective') {
-        this.myIcon = 'lightbulb';
-        // this.mainheader = 'Unit 1';
-        // this.subheader = 'Learning Objectives';
-        this.accentColor = '#FF9625';
+        this.mainheader = 'Unit 1';
+        this.subheader = 'Learning Objectives';
+        this.accentColor = "orange";
       }
       if (propName === 'type' && this[propName] === 'fact') {
-        this.myIcon = 'question';
         this.mainheader = 'Unit 1';
         this.subheader = 'Did you know?';
-        this.accentColor = '#0066CA';
+        this.accentColor = "light-blue";
       }
     });
-  }
-
-  // Lit life-cycle; this fires the 1st time the element is rendered on the screen
-  // this is a sign it is safe to make calls to this.shadowRoot
-  firstUpdated(changedProperties) {
-    if (super.firstUpdated) {
-      super.firstUpdated(changedProperties);
-    }
   }
 
   // HTMLElement life-cycle, element has been connected to the page / added or moved
@@ -98,34 +84,29 @@ export class SciCard extends SimpleColors {
     super.disconnectedCallback();
   }
 
-  /* eslint-disable no-param-reassign */
-  stateToggle() {
-    // console.log(this.shadowRoot.querySelector('details'))
+  stateToggle(e) {
     // https://stackoverflow.com/questions/52365938/get-all-elements-containing-a-class-with-queryselector
     if (
-      this.window.document
+      document
         .querySelector('card-frame')
         .shadowRoot.querySelector('sci-card').clientWidth < 380
     ) {
       this.openState = false;
-      const nodeList = this.window.document.querySelectorAll('card-frame');
+      const nodeList = document.querySelectorAll('card-frame');
       nodeList.forEach(el => {
         el.shadowRoot
           .querySelector('sci-card')
           .shadowRoot.querySelector('details').open = this.openState;
       });
 
-      // this.window.document.querySelector('card-frame').shadowRoot.querySelector('sci-card').shadowRoot.querySelector('details').open = this.openState
     } else {
       this.openState = true;
-      const nodeList2 = this.window.document.querySelectorAll('card-frame');
+      const nodeList2 = document.querySelectorAll('card-frame');
       nodeList2.forEach(el => {
         el.shadowRoot
           .querySelector('sci-card')
           .shadowRoot.querySelector('details').open = this.openState;
       });
-
-      // this.window.document.querySelector('card-frame').shadowRoot.querySelector('sci-card').shadowRoot.querySelector('details').open = true
     }
   }
   /* eslint-enable no-param-reassign */
@@ -179,19 +160,36 @@ export class SciCard extends SimpleColors {
           text-decoration: none;
           transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
         }
+        :host([type='science']) {
+          --sci-card-color : var(--simple-colors-default-theme-accent-7);
+        }
+        :host([type='objective']) {
+          --sci-card-color : var(--simple-colors-default-theme-accent-6);
+        }
+        :host([type='fact']) {
+          --sci-card-color : var(--simple-colors-default-theme-accent-8);
+        }
+        sci-card-banner {
+          background-color: var(--sci-card-color);
+        }
+        invisi-button {
+          --invisi-button-background-color: var(--sci-card-color);
+        }
         @media screen and (max-width: 560px) {
           #drawerContents {
             font-size: .75em;
           }
-
+        }
         @media screen and (min-width: 560px) {
-        #drawerContents {
-          font-size: 1em;
+          #drawerContents {
+            font-size: 1em;
+          }
         }
         @media screen and (min-width: 920px) {
           #drawerContents {
             font-size: 2em;
           }
+        }
       `,
     ];
   }
@@ -207,7 +205,7 @@ export class SciCard extends SimpleColors {
               data-label="Header"
               data-layout-slotname="header"
             >
-              <sci-card-banner my-icon="${this.myIcon}" type="${this.type}">
+              <sci-card-banner type="${this.type}">
                 <div slot="main-header">
                   <slot name="header-container"></slot>
                 </div>
@@ -223,16 +221,12 @@ export class SciCard extends SimpleColors {
           </div>
           <div id="invisi-button-container" slot="invisi-button">
             <invisi-button
-              style="--invisi-button-background-color: ${this.accentColor}"
-              title="Details"
-              link="https://science.psu.edu/"
+              title="${this.label}"
+              link="${this.link}"
             ></invisi-button>
           </div>
         </details>
       </div>
-      <script type="module">
-        import './src/app.js';
-      </script>
     `;
   }
 

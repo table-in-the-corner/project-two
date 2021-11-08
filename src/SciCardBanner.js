@@ -1,10 +1,7 @@
-import { html, css } from 'lit';
-import { SimpleColors } from '@lrnwebcomponents/simple-colors/simple-colors.js';
+import { LitElement, html, css } from 'lit';
 import { IntersectionObserverMixin } from '@lrnwebcomponents/intersection-element/lib/IntersectionObserverMixin.js';
 
-import './SciCardIcon.js';
-
-export class SciCardBanner extends IntersectionObserverMixin(SimpleColors) {
+export class SciCardBanner extends IntersectionObserverMixin(LitElement) {
   static get tag() {
     return 'sci-card-banner';
   }
@@ -12,86 +9,30 @@ export class SciCardBanner extends IntersectionObserverMixin(SimpleColors) {
   // updated fires every time a property defined above changes
   // this allows you to react to variables changing and use javascript to perform logic
   updated(changedProperties) {
-    // changedProperties.forEach((oldValue, propName) => {
-    //   if (propName === "elementVisible" && this[propName]){
-    //     import('./SciCardIcon.js');
-    //   }
-    //   if(
-    //     ["elementVisible", "myIcon", "type"].includes(
-    //       propName
-    //     ) && this.type && this.myIcon && this.elementVisible
-    //   ){
-    //     clearTimeout(this._debounce);
-    //     this._debounce = setTimeout(() => {
-    //       this.updateIcon(this.type, this.myIcon);
-    //     }, 25);
-    //   }
-    // });
-
-    super.update(changedProperties);
+    if (super.updated) {
+      super.updated(changedProperties);
+    }
     changedProperties.forEach((oldValue, propName) => {
       if (propName === 'elementVisible' && this[propName]) {
         import('./SciCardIcon.js');
-        // if (propName === 'type' && this[propName] === 'science') {
-        //   this.myIcon = 'beaker';
-        //   this.accentColor = '#008c37';
-        // }
-        // if (propName === 'type' && this[propName] === 'objective') {
-        //   this.myIcon = 'lightbulb';
-        //   this.accentColor = '#ff9625';
-        // }
-        // if (propName === 'type' && this[propName] === 'fact') {
-        //   this.myIcon = 'question';
-        //   this.accentColor = '#0066ca';
-        // }
-        // // used for storybook when a type above isn't selected
-        // if (propName === 'type' && this[propName] === '') {
-        //   this.myIcon = 'lightbulb';
-        //   this.accentColor = '#835fff';
-        // }
       }
     });
   }
 
-  // Lit life-cycle; this fires the 1st time the element is rendered on the screen
-  // this is a sign it is safe to make calls to this.shadowRoot
-  firstUpdated(changedProperties) {
-    if (super.firstUpdated) {
-      super.firstUpdated(changedProperties);
-    }
-  }
-
-  // HTMLElement life-cycle, element has been connected to the page / added or moved
-  // this fires EVERY time the element is moved
-  connectedCallback() {
-    super.connectedCallback();
-  }
-
-  // HTMLElement life-cycle, element has been removed from the page OR moved
-  // this fires every time the element moves
-  disconnectedCallback() {
-    super.disconnectedCallback();
-  }
-
   constructor() {
     super();
-    this.type = '';
-    this.myIcon = 'lightbulb';
-    this.accentColor = 'blue';
+    this.type = 'fact';
   }
 
   static get properties() {
     return {
       ...super.properties,
       type: { type: String, reflect: true },
-      myIcon: { type: String, attribute: 'my-icon' },
-      accentColor: { type: String, attribute: 'accent-color' },
     };
   }
 
   static get styles() {
     return [
-      ...super.styles,
       css`
         :host {
           display: block;
@@ -163,15 +104,6 @@ export class SciCardBanner extends IntersectionObserverMixin(SimpleColors) {
             font-size: 3rem;
           }
         }
-        :host([type='science']) {
-          background-color: var(--simple-colors-default-theme-green-7);
-        }
-        :host([type='objective']) {
-          background-color: var(--simple-colors-default-theme-orange-6);
-        }
-        :host([type='fact']) {
-          background-color: var(--simple-colors-default-theme-light-blue-8);
-        }
       `,
     ];
   }
@@ -180,13 +112,10 @@ export class SciCardBanner extends IntersectionObserverMixin(SimpleColors) {
     return html`
       <div
         id="bannerElement"
-        style="--sci-card-banner-color: ${this.accentColor}"
       >
         ${this.elementVisible
           ? html`<sci-card-icon
-              icon="${this.myIcon}"
-              my-icon="${this.myIcon}"
-              type="${this.myIcon}"
+              type="${this.type}"
             ></sci-card-icon>`
           : ``}
         <div id="banner">
@@ -199,3 +128,4 @@ export class SciCardBanner extends IntersectionObserverMixin(SimpleColors) {
     `;
   }
 }
+customElements.define(SciCardBanner.tag, SciCardBanner);
