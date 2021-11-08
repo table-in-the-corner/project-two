@@ -88,12 +88,13 @@ export class SciCard extends SimpleColors {
   // this fires EVERY time the element is moved
   connectedCallback() {
     super.connectedCallback();
-    window.addEventListener('resize', this.stateToggle);
+    window.addEventListener('resize', this.stateToggle.bind(this));
   }
 
   // HTMLElement life-cycle, element has been removed from the page OR moved
   // this fires every time the element moves
   disconnectedCallback() {
+    window.removeEventListener('resize', this.stateToggle.bind(this));
     super.disconnectedCallback();
   }
 
